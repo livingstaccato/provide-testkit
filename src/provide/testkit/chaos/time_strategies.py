@@ -39,7 +39,9 @@ def time_advances(
         ```
     """
     if allow_backwards:
-        return draw(st.floats(min_value=-max_advance, max_value=max_advance, allow_nan=False, allow_infinity=False))
+        return draw(
+            st.floats(min_value=-max_advance, max_value=max_advance, allow_nan=False, allow_infinity=False)
+        )
     return draw(st.floats(min_value=min_advance, max_value=max_advance, allow_nan=False, allow_infinity=False))
 
 
@@ -76,7 +78,7 @@ def clock_skew(
 
 
 @composite
-def timeout_patterns(
+def timeout_patterns(  # type: ignore[misc]
     draw: DrawFn,
     min_timeout: float = 0.01,
     max_timeout: float = 60.0,

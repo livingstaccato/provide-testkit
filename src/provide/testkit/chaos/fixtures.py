@@ -169,16 +169,13 @@ def hypothesis_chaos_settings() -> Generator[None, None, None]:
                 pass
         ```
     """
-    # Store original profile
-    original_profile = settings.default
-
     # Apply chaos profile
     settings.load_profile("chaos")
 
     yield
 
-    # Restore original
-    settings.default = original_profile
+    # Restore to default profile
+    settings.load_profile("default")
 
 
 @pytest.fixture

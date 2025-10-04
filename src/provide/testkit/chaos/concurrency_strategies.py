@@ -40,7 +40,11 @@ def thread_counts(
         ```
     """
     if include_extremes:
-        return draw(st.one_of(st.just(1), st.just(max_threads), st.integers(min_value=min_threads, max_value=max_threads)))
+        return draw(
+            st.one_of(
+                st.just(1), st.just(max_threads), st.integers(min_value=min_threads, max_value=max_threads)
+            )
+        )
     return draw(st.integers(min_value=min_threads, max_value=max_threads))
 
 
@@ -114,7 +118,14 @@ def deadlock_scenarios(
     for _ in range(num_threads):
         num_locks = draw(st.integers(min_value=1, max_value=num_resources))
         # Generate a permutation of resource IDs
-        sequence = draw(st.lists(st.integers(min_value=0, max_value=num_resources - 1), min_size=num_locks, max_size=num_locks, unique=True))
+        sequence = draw(
+            st.lists(
+                st.integers(min_value=0, max_value=num_resources - 1),
+                min_size=num_locks,
+                max_size=num_locks,
+                unique=True,
+            )
+        )
         lock_sequences.append(sequence)
 
     return {
@@ -201,7 +212,7 @@ def lock_contention_patterns(
         ```
     """
     # Generate lock access patterns
-    operations = []
+    operations: list[dict[str, Any]] = []
     for _ in range(num_operations):
         # Which lock(s) does this operation need?
         num_locks_needed = draw(st.integers(min_value=1, max_value=min(3, num_locks)))

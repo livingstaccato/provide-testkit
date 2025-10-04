@@ -14,7 +14,7 @@ from hypothesis.strategies import DrawFn, composite
 
 
 @composite
-def file_sizes(
+def file_sizes(  # type: ignore[misc]
     draw: DrawFn,
     min_size: int = 0,
     max_size: int = 10 * 1024 * 1024,  # 10MB default
@@ -352,7 +352,13 @@ def path_traversal_patterns(
         return draw(st.sampled_from(patterns))
     else:
         # Safe relative path
-        parts = draw(st.lists(st.text(alphabet=st.characters(min_codepoint=97, max_codepoint=122), min_size=1, max_size=10), min_size=1, max_size=5))
+        parts = draw(
+            st.lists(
+                st.text(alphabet=st.characters(min_codepoint=97, max_codepoint=122), min_size=1, max_size=10),
+                min_size=1,
+                max_size=5,
+            )
+        )
         return str(Path(*parts))
 
 
