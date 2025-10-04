@@ -28,6 +28,26 @@ Example:
 
 from __future__ import annotations
 
+from provide.testkit.chaos.concurrency_strategies import (
+    async_event_patterns,
+    deadlock_scenarios,
+    lock_contention_patterns,
+    pid_recycling_scenarios,
+    process_pool_patterns,
+    race_condition_triggers,
+    task_cancellation_patterns,
+    thread_counts,
+)
+from provide.testkit.chaos.io_strategies import (
+    buffer_overflow_patterns,
+    disk_full_scenarios,
+    file_corruption_patterns,
+    file_sizes,
+    lock_file_scenarios,
+    network_error_patterns,
+    path_traversal_patterns,
+    permission_patterns,
+)
 from provide.testkit.chaos.strategies import (
     chaos_timings,
     edge_values,
@@ -36,12 +56,48 @@ from provide.testkit.chaos.strategies import (
     resource_limits,
     unicode_chaos,
 )
+from provide.testkit.chaos.time_strategies import (
+    clock_skew,
+    deadline_scenarios,
+    jitter_patterns,
+    rate_burst_patterns,
+    retry_backoff_patterns,
+    time_advances,
+    timeout_patterns,
+)
 
 __all__ = [
+    # Core strategies
     "chaos_timings",
     "edge_values",
     "failure_patterns",
     "malformed_inputs",
     "resource_limits",
     "unicode_chaos",
+    # Time strategies
+    "clock_skew",
+    "deadline_scenarios",
+    "jitter_patterns",
+    "rate_burst_patterns",
+    "retry_backoff_patterns",
+    "time_advances",
+    "timeout_patterns",
+    # Concurrency strategies
+    "async_event_patterns",
+    "deadlock_scenarios",
+    "lock_contention_patterns",
+    "pid_recycling_scenarios",
+    "process_pool_patterns",
+    "race_condition_triggers",
+    "task_cancellation_patterns",
+    "thread_counts",
+    # I/O strategies
+    "buffer_overflow_patterns",
+    "disk_full_scenarios",
+    "file_corruption_patterns",
+    "file_sizes",
+    "lock_file_scenarios",
+    "network_error_patterns",
+    "path_traversal_patterns",
+    "permission_patterns",
 ]
