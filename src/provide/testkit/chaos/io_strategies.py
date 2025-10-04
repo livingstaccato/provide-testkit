@@ -6,7 +6,7 @@ disk space problems, and network-related chaos scenarios.
 
 from __future__ import annotations
 
-import os
+from pathlib import Path
 from typing import Any
 
 from hypothesis import strategies as st
@@ -353,7 +353,7 @@ def path_traversal_patterns(
     else:
         # Safe relative path
         parts = draw(st.lists(st.text(alphabet=st.characters(min_codepoint=97, max_codepoint=122), min_size=1, max_size=10), min_size=1, max_size=5))
-        return os.path.join(*parts)
+        return str(Path(*parts))
 
 
 __all__ = [

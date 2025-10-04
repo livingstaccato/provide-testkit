@@ -6,12 +6,12 @@ in property-based tests.
 
 from __future__ import annotations
 
-import time
 from collections.abc import Callable, Generator
+import time
 from typing import Any
 
-import pytest
 from hypothesis import Phase, Verbosity, settings
+import pytest
 
 
 class ChaosTimeSource:

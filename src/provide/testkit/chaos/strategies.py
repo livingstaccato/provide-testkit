@@ -281,7 +281,7 @@ def edge_values(
             result = process_int(value)
         ```
     """
-    if value_type == int:
+    if value_type is int:
         edges = [
             st.just(0),
             st.just(1),
@@ -295,7 +295,7 @@ def edge_values(
         ]
         return draw(st.one_of(*edges))
 
-    elif value_type == float:
+    elif value_type is float:
         edges = [
             st.just(0.0),
             st.just(-0.0),
@@ -310,7 +310,7 @@ def edge_values(
         ]
         return draw(st.one_of(*edges))
 
-    elif value_type == str:
+    elif value_type is str:
         edges = [
             st.just(""),
             st.just(" "),
