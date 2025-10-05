@@ -22,8 +22,8 @@ from provide.testkit.time.classes import (
     BenchmarkTimer,
     FrozenTime,
     MockRateLimiter,
-    Timer,
     TimeMachine,
+    Timer,
 )
 
 # Re-export all utilities
@@ -56,14 +56,14 @@ __all__ = [
     "BenchmarkTimer",
     "FrozenTime",
     "MockRateLimiter",
-    "Timer",
     "TimeMachine",
+    "Timer",
     # Utilities
     "advance_time",
-    "make_controlled_time",
     # Fixtures
     "benchmark_timer",
     "freeze_time",
+    "make_controlled_time",
     "mock_datetime",
     "mock_sleep",
     "mock_sleep_with_callback",

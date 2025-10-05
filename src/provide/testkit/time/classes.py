@@ -28,7 +28,7 @@ class TimeMachine:
         self.patches: list[Any] = []
         self.is_frozen = False
 
-    def freeze(self, at: float | None = None) -> "TimeMachine":
+    def freeze(self, at: float | None = None) -> TimeMachine:
         """Freeze time at a specific timestamp."""
         self.is_frozen = True
         self.current_time = at or time.time()
@@ -293,6 +293,6 @@ __all__ = [
     "BenchmarkTimer",
     "FrozenTime",
     "MockRateLimiter",
-    "Timer",
     "TimeMachine",
+    "Timer",
 ]
