@@ -1,4 +1,8 @@
-"""Mutation testing runner."""
+"""Mutation testing result parser and reporter.
+
+This module provides utilities for parsing mutmut results and generating reports.
+It does NOT execute mutmut - users should run `mutmut run` directly.
+"""
 
 from __future__ import annotations
 
@@ -14,13 +18,16 @@ from .config import ModulePriority, MutationConfig
 
 
 class MutationRunner:
-    """Runs mutation tests using mutmut and reports results.
+    """Parses mutation test results from mutmut and generates reports.
+
+    NOTE: This does NOT run mutmut. Run `mutmut run` separately, then use
+    this class to parse results and generate reports.
 
     Implements the QualityTool protocol for integration with testkit quality framework.
     """
 
     def __init__(self, config: dict[str, Any] | None = None) -> None:
-        """Initialize mutation runner.
+        """Initialize mutation result parser.
 
         Args:
             config: Configuration dict, will be converted to MutationConfig
@@ -29,35 +36,26 @@ class MutationRunner:
         self.logger = logger.get_logger(__name__)
 
     def analyze(self, path: Path, **kwargs: Any) -> QualityResult:
-        """Run mutation analysis on the given path.
+        """Parse existing mutation test results from mutmut.
+
+        NOTE: This does NOT run mutmut. You must run `mutmut run` first.
 
         Args:
-            path: Path to analyze (file or directory)
+            path: Path to project root (where .mutmut-cache exists)
             **kwargs: Additional options:
-                - module_filter: Only test specific modules
-                - priority: Only test modules of specific priority
-                - changed_only: Only test changed files (git)
+                - priority: Priority level for target score
 
         Returns:
-            QualityResult with mutation testing results
+            QualityResult with mutation testing results parsed from mutmut cache
         """
         start_time = time.time()
 
         try:
-            # Determine what to mutate
-            if kwargs.get("changed_only"):
-                from .git_integration import get_changed_files
+            # Find project root containing .mutmut-cache
+            project_root = self._find_project_root(path)
 
-                files_to_mutate = get_changed_files(path)
-            elif kwargs.get("module_filter"):
-                files_to_mutate = [kwargs["module_filter"]]
-            elif kwargs.get("priority"):
-                files_to_mutate = self._get_modules_by_priority(kwargs["priority"])
-            else:
-                files_to_mutate = None  # Mutate everything in path
-
-            # Run mutmut
-            result = self._run_mutmut(path, files_to_mutate)
+            # Parse mutmut results
+            result = self._parse_mutmut_results(project_root)
 
             # Calculate score
             total_mutants = result["killed"] + result["survived"] + result["timeout"] + result["suspicious"]
@@ -87,7 +85,7 @@ class MutationRunner:
             )
 
         except Exception as e:
-            self.logger.error(f"Mutation testing failed: {e}")
+            self.logger.error(f"Failed to parse mutation results: {e}")
             return QualityResult(
                 tool="mutation",
                 passed=False,
