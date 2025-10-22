@@ -204,14 +204,25 @@ class MutationRunner:
         Returns:
             Dict with mutation counts
         """
+        # Check if mutmut cache exists
+        cache_file = path / ".mutmut-cache"
+        if not cache_file.exists():
+            self.logger.warning("No mutmut cache found, returning zero counts")
+            return {"killed": 0, "survived": 0, "timeout": 0, "suspicious": 0}
+
         # Run mutmut results to get counts
-        result = subprocess.run(
-            ["mutmut", "results"],
-            cwd=path,
-            capture_output=True,
-            text=True,
-            timeout=30,
-        )
+        try:
+            result = subprocess.run(
+                ["mutmut", "results"],
+                cwd=path,
+                capture_output=True,
+                text=True,
+                timeout=10,
+                check=False,
+            )
+        except subprocess.TimeoutExpired:
+            self.logger.error("mutmut results timed out")
+            return {"killed": 0, "survived": 0, "timeout": 0, "suspicious": 0}
 
         # Parse output like:
         # Survived 🙁: 5
