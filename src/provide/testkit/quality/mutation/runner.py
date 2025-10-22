@@ -168,6 +168,13 @@ class MutationRunner:
         Returns:
             Dict with mutation counts: killed, survived, timeout, suspicious
         """
+        # Find project root (directory containing pyproject.toml)
+        project_root = path if path.is_dir() else path.parent
+        while project_root != project_root.parent:
+            if (project_root / "pyproject.toml").exists():
+                break
+            project_root = project_root.parent
+
         cmd = ["mutmut", "run", "--no-progress"]
 
         if files_to_mutate:
@@ -176,17 +183,17 @@ class MutationRunner:
             # For now, run on all and filter results
             pass
 
-        # Run mutmut
+        # Run mutmut from project root
         subprocess.run(
             cmd,
-            cwd=path,
+            cwd=project_root,
             capture_output=True,
             text=True,
             timeout=3600,  # 1 hour max
         )
 
         # Parse results from mutmut output or cache
-        return self._parse_mutmut_results(path)
+        return self._parse_mutmut_results(project_root)
 
     def _parse_mutmut_results(self, path: Path) -> dict[str, int]:
         """Parse mutmut results from results command.

@@ -70,15 +70,18 @@ class MutationConfig:
                 else:
                     score_thresholds[priority] = float(score)
 
+        # Get defaults from a new instance
+        defaults = cls()
+
         return cls(
-            paths_to_mutate=config.get("paths_to_mutate", cls.paths_to_mutate),
-            exclude_patterns=config.get("exclude_patterns", cls.exclude_patterns),
-            module_priorities=module_priorities or config.get("module_priorities", {}),
-            score_thresholds=score_thresholds or config.get("score_thresholds", cls.score_thresholds),
-            max_workers=config.get("max_workers", cls.max_workers),
-            timeout_per_mutant=config.get("timeout_per_mutant", cls.timeout_per_mutant),
-            use_coverage=config.get("use_coverage", cls.use_coverage),
-            runner=config.get("runner", cls.runner),
+            paths_to_mutate=config.get("paths_to_mutate", defaults.paths_to_mutate),
+            exclude_patterns=config.get("exclude_patterns", defaults.exclude_patterns),
+            module_priorities=module_priorities or config.get("module_priorities", defaults.module_priorities),
+            score_thresholds=score_thresholds or config.get("score_thresholds", defaults.score_thresholds),
+            max_workers=config.get("max_workers", defaults.max_workers),
+            timeout_per_mutant=config.get("timeout_per_mutant", defaults.timeout_per_mutant),
+            use_coverage=config.get("use_coverage", defaults.use_coverage),
+            runner=config.get("runner", defaults.runner),
         )
 
     def get_module_priority(self, module_path: str | Path) -> ModulePriority:
