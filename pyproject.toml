@@ -213,15 +213,6 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.dynamic]
 version = {file = "VERSION"}
 
-[tool.setuptools]
-# Include .pth file in package distribution
-include-package-data = true
-
-[tool.setuptools.data-files]
-# Install .pth file to site-packages to auto-load setproctitle blocker
-# This ensures the blocker is active in all Python processes (including xdist workers)
-"" = ["provide_testkit_setproctitle_blocker.pth"]
-
 [tool.ruff]
 target-version = "py311"
 line-length = 111
