@@ -16,7 +16,7 @@ that by mocking out setproctitle before it can be imported.
 from __future__ import annotations
 
 import sys
-from unittest.mock import MagicMock
+from types import ModuleType
 
 # CRITICAL: This must happen at module-level (import time), NOT in a hook.
 # Hooks run too late - xdist may have already imported setproctitle by then.
@@ -24,30 +24,53 @@ from unittest.mock import MagicMock
 # By executing this at import time, we ensure the mock is in sys.modules
 # BEFORE pytest-xdist workers initialize and try to import setproctitle.
 
+
+# Lightweight no-op functions (much faster than MagicMock)
+def _noop_setproctitle(title: str) -> None:
+    """No-op replacement for setproctitle.setproctitle."""
+    pass
+
+
+def _noop_getproctitle() -> str:
+    """No-op replacement for setproctitle.getproctitle."""
+    return "python"
+
+
+def _noop_setthreadtitle(title: str) -> None:
+    """No-op replacement for setproctitle.setthreadtitle."""
+    pass
+
+
+def _noop_getthreadtitle() -> str:
+    """No-op replacement for setproctitle.getthreadtitle."""
+    return ""
+
+
 if "setproctitle" not in sys.modules:
-    # Create a comprehensive mock that implements all setproctitle functions
-    mock_setproctitle = MagicMock()
-    mock_setproctitle.setproctitle = MagicMock(return_value=None)
-    mock_setproctitle.getproctitle = MagicMock(return_value="python")
-    mock_setproctitle.setthreadtitle = MagicMock(return_value=None)
-    mock_setproctitle.getthreadtitle = MagicMock(return_value="")
+    # Create a lightweight fake module with no-op functions
+    # This is much faster than MagicMock (zero overhead)
+    mock_module = ModuleType("setproctitle")
+    mock_module.setproctitle = _noop_setproctitle  # type: ignore[attr-defined]
+    mock_module.getproctitle = _noop_getproctitle  # type: ignore[attr-defined]
+    mock_module.setthreadtitle = _noop_setthreadtitle  # type: ignore[attr-defined]
+    mock_module.getthreadtitle = _noop_getthreadtitle  # type: ignore[attr-defined]
 
     # Inject into sys.modules to intercept all imports
-    sys.modules["setproctitle"] = mock_setproctitle
+    sys.modules["setproctitle"] = mock_module
 else:
     # setproctitle was already imported (edge case)
-    # Replace it with a mock to disable functionality
+    # Replace its functions with lightweight no-ops
     existing_module = sys.modules["setproctitle"]
 
     # Replace all callable attributes with no-ops
     if hasattr(existing_module, "setproctitle"):
-        existing_module.setproctitle = MagicMock(return_value=None)
+        setattr(existing_module, "setproctitle", _noop_setproctitle)
     if hasattr(existing_module, "getproctitle"):
-        existing_module.getproctitle = MagicMock(return_value="python")
+        setattr(existing_module, "getproctitle", _noop_getproctitle)
     if hasattr(existing_module, "setthreadtitle"):
-        existing_module.setthreadtitle = MagicMock(return_value=None)
+        setattr(existing_module, "setthreadtitle", _noop_setthreadtitle)
     if hasattr(existing_module, "getthreadtitle"):
-        existing_module.getthreadtitle = MagicMock(return_value="")
+        setattr(existing_module, "getthreadtitle", _noop_getthreadtitle)
 
 
 def pytest_load_initial_conftests() -> None:
