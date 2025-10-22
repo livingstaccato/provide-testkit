@@ -8,7 +8,6 @@ from typing import Any
 import pytest
 
 from ..base import BaseQualityFixture, QualityResult
-from .config import MutationConfig
 from .runner import MutationRunner
 from .tracker import MutationTracker
 
@@ -20,7 +19,7 @@ class MutationFixture(BaseQualityFixture):
     automatic configuration loading and result tracking.
     """
 
-    def __init__(self, config: dict[str, Any] | None = None, artifact_dir: Path | None = None):
+    def __init__(self, config: dict[str, Any] | None = None, artifact_dir: Path | None = None) -> None:
         """Initialize mutation fixture.
 
         Args:

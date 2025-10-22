@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 import subprocess
 import time
-from pathlib import Path
 from typing import Any
 
 from provide.foundation import logger
 
 from ..base import QualityResult
-from .config import MutationConfig, ModulePriority
+from .config import ModulePriority, MutationConfig
 
 
 class MutationRunner:
@@ -19,7 +19,7 @@ class MutationRunner:
     Implements the QualityTool protocol for integration with testkit quality framework.
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         """Initialize mutation runner.
 
         Args:
@@ -61,10 +61,7 @@ class MutationRunner:
 
             # Calculate score
             total_mutants = result["killed"] + result["survived"] + result["timeout"] + result["suspicious"]
-            if total_mutants == 0:
-                score = 100.0
-            else:
-                score = (result["killed"] / total_mutants) * 100
+            score = 100.0 if total_mutants == 0 else result["killed"] / total_mutants * 100
 
             # Determine if passed based on target score
             target_score = self._get_target_score(path, kwargs.get("priority"))
@@ -180,7 +177,7 @@ class MutationRunner:
             pass
 
         # Run mutmut
-        result = subprocess.run(
+        subprocess.run(
             cmd,
             cwd=path,
             capture_output=True,

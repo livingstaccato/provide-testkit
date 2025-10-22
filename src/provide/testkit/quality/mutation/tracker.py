@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-import json
 from dataclasses import asdict, dataclass
 from datetime import datetime
+import json
 from pathlib import Path
 from typing import Any
 
@@ -37,7 +37,7 @@ class MutationScore:
 class MutationTracker:
     """Tracks mutation scores over time and detects regressions."""
 
-    def __init__(self, scores_file: Path | None = None):
+    def __init__(self, scores_file: Path | None = None) -> None:
         """Initialize tracker.
 
         Args:
@@ -123,7 +123,9 @@ class MutationTracker:
         history = self.get_history(module, limit=1)
         return history[0] if history else None
 
-    def check_regression(self, module: str, current_score: float, threshold: float = 5.0) -> tuple[bool, float]:
+    def check_regression(
+        self, module: str, current_score: float, threshold: float = 5.0
+    ) -> tuple[bool, float]:
         """Check if current score represents a regression.
 
         Args:

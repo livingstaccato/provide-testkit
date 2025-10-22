@@ -8,14 +8,14 @@ from unittest.mock import Mock, patch
 import pytest
 
 from provide.testkit.quality.mutation import (
+    ModulePriority,
     MutationConfig,
     MutationRunner,
     MutationTracker,
-    ModulePriority,
 )
 
 
-def test_mutation_config_defaults():
+def test_mutation_config_defaults() -> None:
     """Test MutationConfig default values."""
     config = MutationConfig()
 
@@ -26,7 +26,7 @@ def test_mutation_config_defaults():
     assert config.score_thresholds[ModulePriority.HIGH] == 80.0
 
 
-def test_mutation_config_from_dict():
+def test_mutation_config_from_dict() -> None:
     """Test creating MutationConfig from dictionary."""
     config_dict = {
         "paths_to_mutate": ["src/myapp"],
@@ -42,7 +42,7 @@ def test_mutation_config_from_dict():
     assert config.max_workers == 8
 
 
-def test_mutation_config_get_module_priority():
+def test_mutation_config_get_module_priority() -> None:
     """Test getting module priority."""
     config = MutationConfig(module_priorities={"src/security.py": ModulePriority.CRITICAL})
 
@@ -50,7 +50,7 @@ def test_mutation_config_get_module_priority():
     assert config.get_module_priority("src/other.py") == ModulePriority.STANDARD
 
 
-def test_mutation_config_get_target_score():
+def test_mutation_config_get_target_score() -> None:
     """Test getting target score for module."""
     config = MutationConfig(
         module_priorities={"src/security.py": ModulePriority.CRITICAL},
@@ -61,7 +61,7 @@ def test_mutation_config_get_target_score():
     assert config.get_target_score("src/other.py") == 60.0
 
 
-def test_mutation_runner_initialization():
+def test_mutation_runner_initialization() -> None:
     """Test MutationRunner initialization."""
     runner = MutationRunner({})
 
@@ -70,7 +70,7 @@ def test_mutation_runner_initialization():
 
 
 @patch("provide.testkit.quality.mutation.runner.subprocess.run")
-def test_mutation_runner_parse_results(mock_run):
+def test_mutation_runner_parse_results(mock_run) -> None:
     """Test parsing mutmut results."""
     mock_run.return_value = Mock(
         stdout="Survived 🙁: 5\nKilled ⚔️: 120\nTimeout ⏰: 2\nSuspicious 🤔: 1\n"
@@ -85,7 +85,7 @@ def test_mutation_runner_parse_results(mock_run):
     assert counts["suspicious"] == 1
 
 
-def test_mutation_tracker_initialization(tmp_path):
+def test_mutation_tracker_initialization(tmp_path) -> None:
     """Test MutationTracker initialization."""
     scores_file = tmp_path / ".mutation-scores.json"
     tracker = MutationTracker(scores_file)
@@ -94,7 +94,7 @@ def test_mutation_tracker_initialization(tmp_path):
     assert isinstance(tracker._scores, dict)
 
 
-def test_mutation_tracker_record_score(tmp_path):
+def test_mutation_tracker_record_score(tmp_path) -> None:
     """Test recording a mutation score."""
     scores_file = tmp_path / ".mutation-scores.json"
     tracker = MutationTracker(scores_file)
@@ -110,7 +110,7 @@ def test_mutation_tracker_record_score(tmp_path):
     assert scores_file.exists()
 
 
-def test_mutation_tracker_get_history(tmp_path):
+def test_mutation_tracker_get_history(tmp_path) -> None:
     """Test getting mutation score history."""
     scores_file = tmp_path / ".mutation-scores.json"
     tracker = MutationTracker(scores_file)
@@ -129,7 +129,7 @@ def test_mutation_tracker_get_history(tmp_path):
     assert history[2].score == 80.0
 
 
-def test_mutation_tracker_check_regression(tmp_path):
+def test_mutation_tracker_check_regression(tmp_path) -> None:
     """Test regression detection."""
     scores_file = tmp_path / ".mutation-scores.json"
     tracker = MutationTracker(scores_file)
@@ -149,7 +149,7 @@ def test_mutation_tracker_check_regression(tmp_path):
     assert is_regression is False
 
 
-def test_mutation_tracker_get_trend(tmp_path):
+def test_mutation_tracker_get_trend(tmp_path) -> None:
     """Test trend calculation."""
     scores_file = tmp_path / ".mutation-scores.json"
     tracker = MutationTracker(scores_file)
@@ -166,7 +166,7 @@ def test_mutation_tracker_get_trend(tmp_path):
 
 
 @pytest.mark.integration
-def test_mutation_fixture_integration(mutation_runner):
+def test_mutation_fixture_integration(mutation_runner) -> None:
     """Test mutation fixture integration."""
     assert mutation_runner is not None
     assert hasattr(mutation_runner, "analyze")

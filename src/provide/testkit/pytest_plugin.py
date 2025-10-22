@@ -41,19 +41,12 @@ class SetproctitleImportBlocker:
         path: Any = None,
         target: Any = None,
     ) -> None:
-        """Block setproctitle imports by returning None (not found).
+        """Block setproctitle imports by raising ImportError.
 
-        Returning None from find_spec makes Python raise ImportError,
-        which xdist catches and handles gracefully.
+        When setproctitle is imported, this hook raises ImportError,
+        which pytest-xdist catches and handles gracefully by using
+        its built-in no-op fallback implementation.
         """
-        if fullname == "setproctitle":
-            # Raise ImportError immediately - cleaner than returning a broken spec
-            raise ImportError("setproctitle import blocked by provide-testkit to prevent macOS freezing")
-        return None
-
-    # For Python < 3.4 compatibility (though we require 3.11+)
-    def find_module(self, fullname: str, path: Any = None) -> Any:
-        """Legacy import hook method for older Python versions."""
         if fullname == "setproctitle":
             raise ImportError("setproctitle import blocked by provide-testkit to prevent macOS freezing")
         return None

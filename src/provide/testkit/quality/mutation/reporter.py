@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
 from ..base import QualityResult
 
@@ -78,7 +77,11 @@ class MutationReporter:
         lines = []
         lines.append("# 🧬 Mutation Testing Results\n")
 
-        status_badge = "![PASSED](https://img.shields.io/badge/status-passed-success)" if result.passed else "![FAILED](https://img.shields.io/badge/status-failed-critical)"
+        status_badge = (
+            "![PASSED](https://img.shields.io/badge/status-passed-success)"
+            if result.passed
+            else "![FAILED](https://img.shields.io/badge/status-failed-critical)"
+        )
         score_badge = f"![Score](https://img.shields.io/badge/score-{result.score:.0f}%25-blue)"
 
         lines.append(f"{status_badge} {score_badge}\n")
@@ -125,7 +128,7 @@ class MutationReporter:
     <style>
         body {{ font-family: Arial, sans-serif; margin: 40px; }}
         .header {{ background: #f0f0f0; padding: 20px; border-radius: 5px; }}
-        .{status_class} {{ color: {'green' if result.passed else 'red'}; }}
+        .{status_class} {{ color: {"green" if result.passed else "red"}; }}
         .score {{ font-size: 48px; font-weight: bold; }}
         table {{ border-collapse: collapse; width: 100%; margin-top: 20px; }}
         th, td {{ border: 1px solid #ddd; padding: 12px; text-align: left; }}
@@ -149,23 +152,23 @@ class MutationReporter:
         </tr>
         <tr>
             <td>Total Mutants</td>
-            <td>{result.details.get('total_mutants', 0)}</td>
+            <td>{result.details.get("total_mutants", 0)}</td>
         </tr>
         <tr>
             <td>⚔️ Killed</td>
-            <td>{result.details.get('killed', 0)}</td>
+            <td>{result.details.get("killed", 0)}</td>
         </tr>
         <tr>
             <td>🙁 Survived</td>
-            <td>{result.details.get('survived', 0)}</td>
+            <td>{result.details.get("survived", 0)}</td>
         </tr>
         <tr>
             <td>⏰ Timeout</td>
-            <td>{result.details.get('timeout', 0)}</td>
+            <td>{result.details.get("timeout", 0)}</td>
         </tr>
         <tr>
             <td>🤔 Suspicious</td>
-            <td>{result.details.get('suspicious', 0)}</td>
+            <td>{result.details.get("suspicious", 0)}</td>
         </tr>
     </table>
 
@@ -193,8 +196,10 @@ class MutationReporter:
         for module, result in sorted(results.items()):
             status_icon = "✅" if result.passed else "❌"
             lines.append(f"{status_icon} {module}")
-            lines.append(f"   Score: {result.score:.1f}% | Killed: {result.details.get('killed', 0)} | "
-                        f"Survived: {result.details.get('survived', 0)}")
+            lines.append(
+                f"   Score: {result.score:.1f}% | Killed: {result.details.get('killed', 0)} | "
+                f"Survived: {result.details.get('survived', 0)}"
+            )
             lines.append("")
 
         return "\n".join(lines)

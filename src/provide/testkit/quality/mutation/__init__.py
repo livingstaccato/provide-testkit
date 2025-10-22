@@ -29,19 +29,19 @@ Usage:
 
 from __future__ import annotations
 
-from .config import MutationConfig, ModulePriority
+from .config import ModulePriority, MutationConfig
 from .fixture import MutationFixture, mutation_runner, session_mutation
 from .reporter import MutationReporter
 from .runner import MutationRunner
 from .tracker import MutationTracker
 
 __all__ = [
+    "ModulePriority",
     "MutationConfig",
     "MutationFixture",
     "MutationReporter",
     "MutationRunner",
     "MutationTracker",
-    "ModulePriority",
     "mutation_runner",
     "session_mutation",
 ]
