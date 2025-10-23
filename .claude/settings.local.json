@@ -3,7 +3,9 @@
     "allow": [
       "Bash(rm:*)",
       "Read(//Users/tim/code/gh/**)",
-      "Read(//Users/tim/code/**)"
+      "Read(//Users/tim/code/**)",
+      "WebSearch",
+      "Bash(python3:*)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
