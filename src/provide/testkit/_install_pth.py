@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 
 
-def install_pth_file() -> int:
+def install_pth_file(*, verbose: bool = False) -> int:
     """Install/symlink .pth file to site-packages root.
 
     Returns:
@@ -59,16 +59,19 @@ def install_pth_file() -> int:
             pth_dest.unlink()
 
         shutil.copy2(pth_source, pth_dest)
-        print(f"✓ Installed {pth_dest}")
+        if verbose:
+            print(f"✓ Installed {pth_dest}")
         return 0
 
     except PermissionError:
-        print(f"Warning: No permission to write to {pth_dest}", file=sys.stderr)
-        print("The setproctitle blocker will use fallback mechanisms", file=sys.stderr)
+        if verbose:
+            print(f"Warning: No permission to write to {pth_dest}", file=sys.stderr)
+            print("The setproctitle blocker will use fallback mechanisms", file=sys.stderr)
         return 0  # Don't fail installation
     except Exception as e:
-        print(f"Warning: Could not install .pth file: {e}", file=sys.stderr)
-        print("The setproctitle blocker will use fallback mechanisms", file=sys.stderr)
+        if verbose:
+            print(f"Warning: Could not install .pth file: {e}", file=sys.stderr)
+            print("The setproctitle blocker will use fallback mechanisms", file=sys.stderr)
         return 0  # Don't fail installation
 
 
@@ -115,12 +118,22 @@ def uninstall_pth_file() -> int:
         return 1
 
 
+def _cli_install() -> int:
+    """CLI entry point for install command."""
+    return install_pth_file(verbose=True)
+
+
+def _cli_uninstall() -> int:
+    """CLI entry point for uninstall command."""
+    return uninstall_pth_file()
+
+
 if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1 and sys.argv[1] == "uninstall":
-        sys.exit(uninstall_pth_file())
+        sys.exit(_cli_uninstall())
     else:
-        sys.exit(install_pth_file())
+        sys.exit(_cli_install())
 
 
 # 📦🔗⚙️✨

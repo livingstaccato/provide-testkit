@@ -19,7 +19,10 @@
       "Bash(TESTKIT_PTH_LOG=1 .venv/bin/python3:*)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:peps.python.org)",
-      "Bash(.venv/bin/provide-testkit-install-pth:*)"
+      "Bash(.venv/bin/provide-testkit-install-pth:*)",
+      "Bash(.venv/bin/python3:*)",
+      "Bash(.venv/bin/pytest tests/ -k \"test_auth\" -n 4 -v)",
+      "Bash(.venv/bin/pytest tests/ -k \"test_auth\" -n 2 -v)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
