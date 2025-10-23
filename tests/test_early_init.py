@@ -160,10 +160,17 @@ class TestInstallBlocker:
 
     def test_handles_import_errors_gracefully(self) -> None:
         """Should not crash if blocker import fails."""
-        # Mock the import to fail
-        with patch(
-            "provide.testkit._early_init.SetproctitleImportBlocker", side_effect=ImportError()
-        ):
+        # Mock the module import to fail (the actual from...import statement)
+        import builtins
+
+        real_import = builtins.__import__
+
+        def mock_import(name, *args, **kwargs):
+            if name == "provide.testkit.pytest_plugin":
+                raise ImportError("Mocked import failure")
+            return real_import(name, *args, **kwargs)
+
+        with patch("builtins.__import__", side_effect=mock_import):
             # This should not raise an exception
             try:
                 _early_init._install_blocker()

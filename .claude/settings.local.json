@@ -6,7 +6,10 @@
       "Read(//Users/tim/code/**)",
       "WebSearch",
       "Bash(python3:*)",
-      "Read(//private/tmp/**)"
+      "Read(//private/tmp/**)",
+      "Bash(uv run pytest:*)",
+      "Bash(uv pip install:*)",
+      "Bash(cp:*)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"

@@ -218,14 +218,14 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 packages = {find = {where = ["src"]}}
 
+[tool.setuptools.dynamic]
+version = {file = "VERSION"}
+
 # Install .pth file to site-packages for early setproctitle blocker initialization
 # This ensures the blocker is installed during Python's site initialization,
 # before pytest or any user code runs
-[tool.setuptools.data-files]
-"." = ["src/provide_testkit_init.pth"]
-
-[tool.setuptools.dynamic]
-version = {file = "VERSION"}
+# Note: We use a custom install script to place the .pth file in site-packages root
+# since setuptools doesn't have native support for this use case
 
 [tool.ruff]
 target-version = "py311"
