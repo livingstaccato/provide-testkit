@@ -81,6 +81,10 @@ def _install_blocker() -> None:
     Note:
         This function must be extremely defensive with error handling since any
         uncaught exception will cause Python startup to fail.
+
+        IMPORTANT: We cannot use Foundation logger here because Foundation itself
+        imports setproctitle during initialization, which would create a circular
+        dependency. The blocker must be installed BEFORE Foundation is imported.
     """
     try:
         # Only proceed if we're in a testing context
@@ -93,28 +97,14 @@ def _install_blocker() -> None:
 
         # Check if blocker is already installed
         if any(isinstance(hook, SetproctitleImportBlocker) for hook in sys.meta_path):
-            # Already installed - log if we have a logger
-            logger = _get_logger()
-            if logger:
-                logger.debug(
-                    "setproctitle blocker already installed in sys.meta_path",
-                    pid=os.getpid(),
-                    source="early_init",
-                )
+            # Already installed - can't log because Foundation imports setproctitle
             return
 
         # Install the blocker at the front of sys.meta_path
         sys.meta_path.insert(0, SetproctitleImportBlocker())
 
-        # Log successful installation if we have a logger
-        logger = _get_logger()
-        if logger:
-            logger.debug(
-                "setproctitle blocker installed via .pth early init",
-                pid=os.getpid(),
-                source="early_init",
-                meta_path_length=len(sys.meta_path),
-            )
+        # Successfully installed - can't log because Foundation imports setproctitle
+        # The blocker will log its own activity via debug files
 
     except Exception:
         # Silently ignore any errors during blocker installation
