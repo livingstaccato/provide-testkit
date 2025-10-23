@@ -10,7 +10,29 @@ Comprehensive fixtures and utilities for testing Foundation-based applications.
 Note: Testing information is displayed via pytest hooks in conftest.py
 """
 
+from __future__ import annotations
+
+import sys
 from typing import Any
+
+# ============================================================================
+# Install setproctitle blocker IMMEDIATELY on package import
+# ============================================================================
+# This must happen BEFORE pytest-xdist (or any other tool) imports setproctitle.
+# The blocker is installed at module load time to ensure it's active as early
+# as possible in the Python startup sequence.
+#
+# Projects should import provide.testkit in their tests/conftest.py to ensure
+# this blocker is installed before pytest initializes.
+# ============================================================================
+
+import provide.testkit.pytest_plugin
+
+if not any(
+    isinstance(hook, provide.testkit.pytest_plugin.SetproctitleImportBlocker)
+    for hook in sys.meta_path
+):
+    sys.meta_path.insert(0, provide.testkit.pytest_plugin.SetproctitleImportBlocker())
 
 # Mapping of attribute names to their modules for lazy loading.
 _LAZY_IMPORTS = {
