@@ -205,10 +205,10 @@ class TestModuleLevelExecution:
 
 
 class TestIntegrationWithFoundationLogger:
-    """Integration tests with Foundation logger."""
+    """Integration tests - Foundation logger not used to avoid circular dependency."""
 
-    def test_uses_foundation_logger_when_available(self) -> None:
-        """Should use Foundation logger for debug messages when available."""
+    def test_blocker_installs_without_foundation_logger(self) -> None:
+        """Should install blocker without using Foundation logger (avoids circular dependency)."""
         from provide.testkit.pytest_plugin import SetproctitleImportBlocker
 
         # Remove any existing blocker
@@ -216,41 +216,44 @@ class TestIntegrationWithFoundationLogger:
         sys.meta_path = [h for h in sys.meta_path if not isinstance(h, SetproctitleImportBlocker)]
 
         try:
-            # Mock the logger
-            mock_logger = MagicMock()
+            with patch.object(sys, "argv", ["pytest"]):
+                _early_init._install_blocker()
 
-            with patch("provide.testkit._early_init._get_logger", return_value=mock_logger):
-                with patch.object(sys, "argv", ["pytest"]):
-                    _early_init._install_blocker()
-
-                # Logger should have been called
-                assert (
-                    mock_logger.debug.called
-                ), "Foundation logger should be used when available"
+            # Should install blocker without calling Foundation logger
+            # (Foundation logger would cause circular dependency)
+            assert any(
+                isinstance(hook, SetproctitleImportBlocker) for hook in sys.meta_path
+            ), "Blocker should be installed without Foundation logger"
 
         finally:
             sys.meta_path = original_meta_path
 
-    def test_works_without_foundation_logger(self) -> None:
-        """Should work gracefully when Foundation logger is not available."""
+    def test_no_foundation_import_during_install(self) -> None:
+        """Verify Foundation is not imported during blocker installation."""
         from provide.testkit.pytest_plugin import SetproctitleImportBlocker
 
         # Remove any existing blocker
         original_meta_path = sys.meta_path.copy()
         sys.meta_path = [h for h in sys.meta_path if not isinstance(h, SetproctitleImportBlocker)]
 
-        try:
-            with patch("provide.testkit._early_init._get_logger", return_value=None):
-                with patch.object(sys, "argv", ["pytest"]):
-                    _early_init._install_blocker()
+        # Remove Foundation from sys.modules if present
+        foundation_modules = {k: v for k, v in sys.modules.items() if k.startswith("provide.foundation")}
+        for key in foundation_modules:
+            del sys.modules[key]
 
-                # Should still install blocker even without logger
-                assert any(
-                    isinstance(hook, SetproctitleImportBlocker) for hook in sys.meta_path
-                ), "Blocker should be installed even when logger is unavailable"
+        try:
+            with patch.object(sys, "argv", ["pytest"]):
+                _early_init._install_blocker()
+
+            # Verify Foundation was NOT imported
+            assert not any(
+                k.startswith("provide.foundation") for k in sys.modules
+            ), "Foundation should not be imported during blocker installation"
 
         finally:
             sys.meta_path = original_meta_path
+            # Restore Foundation modules
+            sys.modules.update(foundation_modules)
 
 
 # 🧪✅🔬🛡️
