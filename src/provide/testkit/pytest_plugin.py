@@ -60,6 +60,7 @@ class SetproctitleImportBlocker:
             # Check if there's a stub setproctitle.py in site-packages
             # If found, create a ModuleSpec to load it directly
             import os
+
             for sp in sys.path:
                 stub_path = os.path.join(sp, "setproctitle.py")
                 if os.path.exists(stub_path):
@@ -67,10 +68,7 @@ class SetproctitleImportBlocker:
                     # This prevents Python from finding the real setproctitle package
                     loader = importlib.machinery.SourceFileLoader(fullname, stub_path)
                     spec = importlib.util.spec_from_file_location(
-                        fullname,
-                        stub_path,
-                        loader=loader,
-                        submodule_search_locations=None
+                        fullname, stub_path, loader=loader, submodule_search_locations=None
                     )
                     return spec
             # No stub found, block the real setproctitle
