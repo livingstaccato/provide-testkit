@@ -2127,10 +2127,15 @@ crypto = [
 ]
 dev = [
     { name = "bandit" },
+    { name = "behave" },
     { name = "coverage", extra = ["toml"] },
+    { name = "freezegun" },
+    { name = "hypothesis" },
     { name = "interrogate" },
     { name = "mutmut" },
     { name = "mypy" },
+    { name = "pytest-benchmark" },
+    { name = "pytest-testmon" },
     { name = "radon" },
     { name = "ruff" },
 ]
@@ -2322,6 +2327,11 @@ utils = [
     { name = "tabulate" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "provide-testkit", extra = ["advanced-testing", "quality"] },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "bandit", marker = "extra == 'quality'", specifier = ">=1.8.3" },
@@ -2368,10 +2378,10 @@ requires-dist = [
     { name = "provide-foundation" },
     { name = "provide-testkit", extras = ["advanced-testing", "build", "crypto", "docs", "grpc", "process", "profiling", "quality", "transport", "typecheck", "utils"], marker = "extra == 'all'" },
     { name = "provide-testkit", extras = ["advanced-testing", "build", "grpc", "profiling", "standard", "typecheck"], marker = "extra == 'pyvider-dev'" },
+    { name = "provide-testkit", extras = ["advanced-testing", "quality"], marker = "extra == 'dev'" },
     { name = "provide-testkit", extras = ["crypto", "process", "quality", "transport"], marker = "extra == 'standard'" },
     { name = "provide-testkit", extras = ["docs"], marker = "extra == 'docs-standalone'" },
     { name = "provide-testkit", extras = ["grpc", "standard", "typecheck"], marker = "extra == 'grpc-dev'" },
-    { name = "provide-testkit", extras = ["quality"], marker = "extra == 'dev'" },
     { name = "psutil", marker = "extra == 'process'", specifier = ">=7.0.0" },
     { name = "pygments", marker = "extra == 'docs'", specifier = ">=2.19.0" },
     { name = "pymdown-extensions", marker = "extra == 'docs'", specifier = ">=10.16.0" },
@@ -2410,6 +2420,9 @@ requires-dist = [
     { name = "watchdog", marker = "extra == 'docs'", specifier = ">=3.0.0" },
 ]
 provides-extras = ["quality", "typecheck", "advanced-testing", "profiling", "transport", "crypto", "process", "grpc", "build", "docs", "utils", "standard", "grpc-dev", "pyvider-dev", "all", "dev", "docs-standalone"]
+
+[package.metadata.requires-dev]
+dev = [{ name = "provide-testkit", extras = ["quality", "advanced-testing"] }]
 
 [[package]]
 name = "psutil"
