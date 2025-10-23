@@ -83,6 +83,16 @@ run_package_tests() {
         }
     fi
 
+    # Install local provide-foundation and provide-testkit in editable mode
+    # Skip this for the foundation and testkit packages themselves
+    if [ "$package" != "provide-foundation" ] && [ "$package" != "provide-testkit" ]; then
+        echo "[$package] Installing local provide-foundation in editable mode..." >> "$log_file"
+        uv pip install -e /Users/tim/code/gh/provide-io/provide-foundation >> "$log_file" 2>&1 || true
+
+        echo "[$package] Installing local provide-testkit in editable mode..." >> "$log_file"
+        uv pip install -e /Users/tim/code/gh/provide-io/provide-testkit >> "$log_file" 2>&1 || true
+    fi
+
     # Run tests with coverage using uv run (automatically uses .venv)
     echo "[$package] Running pytest with coverage..." >> "$log_file"
     uv run pytest \
