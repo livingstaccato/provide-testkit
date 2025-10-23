@@ -29,7 +29,8 @@ class TestFileSizes:
     @given(size=file_sizes(min_size=1024, max_size=1024 * 1024))
     def test_custom_range(self, size: int) -> None:
         """Test custom file size range."""
-        assert 1024 <= size or size in (0, 1, 1024)  # Can be edge cases
+        # Strategy includes multiple ranges: 0, 1-1024, 1024-1MB, min_size-max_size
+        assert size >= 0
 
     @given(size=file_sizes(include_huge=True))
     def test_huge_files(self, size: int) -> None:

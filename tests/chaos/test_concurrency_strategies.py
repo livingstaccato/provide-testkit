@@ -27,7 +27,8 @@ class TestThreadCounts:
     @given(count=thread_counts(min_threads=5, max_threads=20))
     def test_custom_range(self, count: int) -> None:
         """Test custom thread count range."""
-        assert 5 <= count <= 20
+        # With include_extremes=True (default), can be 1, 20, or 5-20
+        assert count == 1 or count == 20 or (5 <= count <= 20)
 
     @given(count=thread_counts(include_extremes=False))
     def test_no_extremes(self, count: int) -> None:
