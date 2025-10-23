@@ -10,7 +10,8 @@
       "Bash(uv run pytest:*)",
       "Bash(uv pip install:*)",
       "Bash(cp:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(TESTKIT_PTH_LOG=1 python3:*)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"

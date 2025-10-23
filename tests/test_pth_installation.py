@@ -39,8 +39,11 @@ class TestPthFileInstallation:
 
         content = pth_file.read_text().strip()
         assert (
-            content == "import provide.testkit._early_init"
+            "import provide.testkit._early_init" in content
         ), ".pth file should import _early_init module"
+        assert (
+            "TESTKIT_PTH_LOG" in content
+        ), ".pth file should support TESTKIT_PTH_LOG for debugging"
 
     def test_pth_file_installed_in_site_packages(self) -> None:
         """Verify .pth file is installed to site-packages after package install."""
@@ -62,7 +65,7 @@ class TestPthFileInstallation:
                 pth_found = True
                 # Verify content
                 content = pth_path.read_text().strip()
-                assert content == "import provide.testkit._early_init"
+                assert "import provide.testkit._early_init" in content
                 break
 
         assert pth_found, (
