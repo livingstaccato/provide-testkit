@@ -28,6 +28,10 @@ from typing import Any
 
 import os
 
+# Ensure .pth file is installed (one-time setup, idempotent)
+from provide.testkit._install_pth import install_pth_file
+install_pth_file()  # Silently installs/symlinks if not present
+
 # DEBUG: Track when this module is loaded
 _pid = os.getpid()
 _debug_file = f"/tmp/testkit-debug-{_pid}.log"
