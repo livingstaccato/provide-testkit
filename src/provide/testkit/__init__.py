@@ -30,15 +30,22 @@ import os
 
 # DEBUG: Track when this module is loaded
 _pid = os.getpid()
-print(f"🐛 [PID {_pid}] provide.testkit.__init__ is being imported", file=sys.stderr, flush=True)
+_debug_file = f"/tmp/testkit-debug-{_pid}.log"
+with open(_debug_file, "a") as f:
+    f.write(f"🐛 [PID {_pid}] provide.testkit.__init__ is being imported\n")
+    f.flush()
 
 from provide.testkit.pytest_plugin import SetproctitleImportBlocker
 
 if not any(isinstance(hook, SetproctitleImportBlocker) for hook in sys.meta_path):
-    print(f"🐛 [PID {_pid}] Installing SetproctitleImportBlocker", file=sys.stderr, flush=True)
+    with open(_debug_file, "a") as f:
+        f.write(f"🐛 [PID {_pid}] Installing SetproctitleImportBlocker\n")
+        f.flush()
     sys.meta_path.insert(0, SetproctitleImportBlocker())
 else:
-    print(f"🐛 [PID {_pid}] SetproctitleImportBlocker already installed", file=sys.stderr, flush=True)
+    with open(_debug_file, "a") as f:
+        f.write(f"🐛 [PID {_pid}] SetproctitleImportBlocker already installed\n")
+        f.flush()
 
 # Mapping of attribute names to their modules for lazy loading.
 _LAZY_IMPORTS = {
