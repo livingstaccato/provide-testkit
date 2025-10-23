@@ -17,7 +17,8 @@
       "Bash(source .venv/bin/activate)",
       "Bash(.venv/bin/pip:*)",
       "Bash(TESTKIT_PTH_LOG=1 .venv/bin/python3:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:peps.python.org)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
