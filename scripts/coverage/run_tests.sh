@@ -32,9 +32,11 @@ mkdir -p "$LOG_DIR"
 #
 # To customize for your projects, edit this array:
 packages=(
+    "ci-tooling:/Users/tim/code/gh/provide-io/ci-tooling"
     "flavorpack:/Users/tim/code/gh/provide-io/flavorpack"
     "plating:/Users/tim/code/gh/provide-io/plating"
     "provide-foundation:/Users/tim/code/gh/provide-io/provide-foundation"
+    "provide-foundry:/Users/tim/code/gh/provide-io/provide-foundry"
     "provide-testkit:/Users/tim/code/gh/provide-io/provide-testkit"
     "pyvider:/Users/tim/code/gh/provide-io/pyvider"
     "pyvider-components:/Users/tim/code/gh/provide-io/pyvider-components"
@@ -42,6 +44,7 @@ packages=(
     "pyvider-hcl:/Users/tim/code/gh/provide-io/pyvider-hcl"
     "pyvider-rpcplugin:/Users/tim/code/gh/provide-io/pyvider-rpcplugin"
     "supsrc:/Users/tim/code/gh/provide-io/supsrc"
+    "terraform-provider-pyvider:/Users/tim/code/gh/provide-io/terraform-provider-pyvider"
     "tofusoup:/Users/tim/code/gh/provide-io/tofusoup"
     "wrknv:/Users/tim/code/gh/provide-io/wrknv"
 )
