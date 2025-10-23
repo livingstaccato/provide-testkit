@@ -218,10 +218,11 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 packages = {find = {where = ["src"]}}
 
-# Include .pth file to be installed in site-packages root
-# This gets picked up during wheel build and installed to site-packages
-[tool.setuptools.data-files]
-"." = ["src/provide_testkit_init.pth"]
+# Include .pth file as package data (it will be in the package directory)
+# Users will need to run `provide-testkit install-pth` after pip install
+# to copy it to site-packages root
+[tool.setuptools.package-data]
+"provide.testkit" = ["*.pth"]
 
 [tool.setuptools.dynamic]
 version = {file = "VERSION"}
