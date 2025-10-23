@@ -12,7 +12,10 @@
       "Bash(cp:*)",
       "Bash(cat:*)",
       "Bash(TESTKIT_PTH_LOG=1 python3:*)",
-      "Bash(uv build:*)"
+      "Bash(uv build:*)",
+      "Bash(uv pip uninstall:*)",
+      "Bash(source .venv/bin/activate)",
+      "Bash(.venv/bin/pip:*)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
