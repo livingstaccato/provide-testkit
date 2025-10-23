@@ -26,13 +26,10 @@ from typing import Any
 # this blocker is installed before pytest initializes.
 # ============================================================================
 
-import provide.testkit.pytest_plugin
+from provide.testkit.pytest_plugin import SetproctitleImportBlocker
 
-if not any(
-    isinstance(hook, provide.testkit.pytest_plugin.SetproctitleImportBlocker)
-    for hook in sys.meta_path
-):
-    sys.meta_path.insert(0, provide.testkit.pytest_plugin.SetproctitleImportBlocker())
+if not any(isinstance(hook, SetproctitleImportBlocker) for hook in sys.meta_path):
+    sys.meta_path.insert(0, SetproctitleImportBlocker())
 
 # Mapping of attribute names to their modules for lazy loading.
 _LAZY_IMPORTS = {
