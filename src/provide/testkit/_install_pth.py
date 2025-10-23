@@ -50,20 +50,17 @@ def install_pth_file() -> int:
         return 1
 
     try:
-        # Try to create symlink first (preferred)
+        # Always copy (not symlink) so it survives package uninstall
+        # A symlink would break when the package is removed, leaving a dangling
+        # .pth file that errors on Python startup
+        import shutil
+
         if pth_dest.exists() or pth_dest.is_symlink():
             pth_dest.unlink()
 
-        try:
-            pth_dest.symlink_to(pth_source)
-            print(f"✓ Symlinked {pth_dest} -> {pth_source}")
-            return 0
-        except (OSError, NotImplementedError):
-            # Symlink not supported, copy instead
-            import shutil
-            shutil.copy2(pth_source, pth_dest)
-            print(f"✓ Copied {pth_source} -> {pth_dest}")
-            return 0
+        shutil.copy2(pth_source, pth_dest)
+        print(f"✓ Installed {pth_dest}")
+        return 0
 
     except PermissionError:
         print(f"Warning: No permission to write to {pth_dest}", file=sys.stderr)
@@ -75,8 +72,55 @@ def install_pth_file() -> int:
         return 0  # Don't fail installation
 
 
+def uninstall_pth_file() -> int:
+    """Remove .pth file from site-packages root.
+
+    This should be called when the package is uninstalled to clean up
+    the .pth file that was installed to site-packages root.
+
+    Returns:
+        0 on success, 1 on failure
+    """
+    # Find site-packages directory
+    site_packages = None
+    if hasattr(site, "getsitepackages"):
+        site_dirs = site.getsitepackages()
+        if site_dirs:
+            site_packages = Path(site_dirs[0])
+
+    if not site_packages:
+        # Fallback
+        if sys.platform == "win32":
+            site_packages = Path(sys.prefix) / "Lib" / "site-packages"
+        else:
+            python_version = f"python{sys.version_info.major}.{sys.version_info.minor}"
+            site_packages = Path(sys.prefix) / "lib" / python_version / "site-packages"
+
+    # .pth file location
+    pth_dest = site_packages / "provide_testkit_init.pth"
+
+    try:
+        if pth_dest.exists() or pth_dest.is_symlink():
+            pth_dest.unlink()
+            print(f"✓ Removed {pth_dest}")
+            return 0
+        else:
+            print(f"ℹ  .pth file not found at {pth_dest}")
+            return 0
+    except PermissionError:
+        print(f"Warning: No permission to remove {pth_dest}", file=sys.stderr)
+        return 1
+    except Exception as e:
+        print(f"Error removing .pth file: {e}", file=sys.stderr)
+        return 1
+
+
 if __name__ == "__main__":
-    sys.exit(install_pth_file())
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "uninstall":
+        sys.exit(uninstall_pth_file())
+    else:
+        sys.exit(install_pth_file())
 
 
 # 📦🔗⚙️✨

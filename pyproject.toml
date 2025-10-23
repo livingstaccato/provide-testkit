@@ -55,6 +55,7 @@ dev = [
 [project.scripts]
 provide-testkit = "provide.testkit.main:main"
 provide-testkit-install-pth = "provide.testkit._install_pth:install_pth_file"
+provide-testkit-uninstall-pth = "provide.testkit._install_pth:uninstall_pth_file"
 
 [project.entry-points.pytest11]
 provide_testkit = "provide.testkit.pytest_plugin"
