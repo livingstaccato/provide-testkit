@@ -1,1 +1,1 @@
-import provide.testkit._early_init
+import sys; sys.stderr.write("🔌 PTH FILE LOADING: provide_testkit_init.pth executing\n"); sys.stderr.flush(); import provide.testkit._early_init; sys.stderr.write("🔌 PTH FILE LOADED: _early_init imported successfully\n"); sys.stderr.flush()
