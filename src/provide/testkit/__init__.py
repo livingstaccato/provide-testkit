@@ -39,12 +39,15 @@ from provide.testkit.pytest_plugin import SetproctitleImportBlocker
 
 if not any(isinstance(hook, SetproctitleImportBlocker) for hook in sys.meta_path):
     with open(_debug_file, "a") as f:
-        f.write(f"🐛 [PID {_pid}] Installing SetproctitleImportBlocker\n")
+        f.write(f"🐛 [PID {_pid}] Installing SetproctitleImportBlocker (fallback)\n")
         f.flush()
     sys.meta_path.insert(0, SetproctitleImportBlocker())
 else:
     with open(_debug_file, "a") as f:
-        f.write(f"🐛 [PID {_pid}] SetproctitleImportBlocker already installed\n")
+        f.write(
+            f"🐛 [PID {_pid}] SetproctitleImportBlocker already installed "
+            f"(likely via .pth early init)\n"
+        )
         f.flush()
 
 # Mapping of attribute names to their modules for lazy loading.
