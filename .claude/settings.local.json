@@ -16,7 +16,8 @@
       "Bash(uv pip uninstall:*)",
       "Bash(source .venv/bin/activate)",
       "Bash(.venv/bin/pip:*)",
-      "Bash(TESTKIT_PTH_LOG=1 .venv/bin/python3:*)"
+      "Bash(TESTKIT_PTH_LOG=1 .venv/bin/python3:*)",
+      "WebFetch(domain:github.com)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
