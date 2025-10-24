@@ -23,7 +23,10 @@
       "Bash(.venv/bin/python3:*)",
       "Bash(.venv/bin/pytest tests/ -k \"test_auth\" -n 4 -v)",
       "Bash(.venv/bin/pytest tests/ -k \"test_auth\" -n 2 -v)",
-      "Bash(.venv/bin/provide-testkit-uninstall-pth:*)"
+      "Bash(.venv/bin/provide-testkit-uninstall-pth:*)",
+      "Bash(.venv/bin/pytest tests/test_flavorpack_client.py -n 4 -v)",
+      "Bash(.venv/bin/pytest tests/ -k \"client\" -n auto --maxfail=3)",
+      "Bash(.venv/bin/pytest tests/ -n auto --maxfail=5 -x)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
