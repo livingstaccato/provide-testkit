@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import importlib.machinery
 import importlib.util
+import os
 import sys
 from typing import Any
 
@@ -93,9 +94,16 @@ class SetproctitleImportBlocker:
         return None
 
 
-# Install the import hook at module load time
-# This happens BEFORE any other code runs, including xdist's worker initialization
-if not any(isinstance(hook, SetproctitleImportBlocker) for hook in sys.meta_path):
+# Install the import hook ONLY when running under pytest
+# Check if we're in a pytest context by looking for PYTEST_CURRENT_TEST env var
+# or if pytest is being imported
+_is_pytest_context = (
+    "PYTEST_CURRENT_TEST" in os.environ  # Running under pytest
+    or "pytest" in sys.modules  # pytest is already imported
+    or any("pytest" in arg for arg in sys.argv)  # pytest in command line
+)
+
+if _is_pytest_context and not any(isinstance(hook, SetproctitleImportBlocker) for hook in sys.meta_path):
     sys.meta_path.insert(0, SetproctitleImportBlocker())
 
 
