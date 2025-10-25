@@ -28,13 +28,18 @@ def should_install_blocker() -> bool:
     )
 
 
-def install_setproctitle_blocker() -> None:
+def install_setproctitle_blocker(force: bool = False) -> None:
     """Install the setproctitle blocker if in pytest context.
 
     This function is idempotent - it won't install the blocker twice.
     Only installs when running under pytest to avoid breaking production use.
+
+    Args:
+        force: If True, install unconditionally. If False (default), only install
+               if pytest context is detected. Use force=True when calling from
+               pytest_plugin.py which only loads during pytest runs.
     """
-    if not should_install_blocker():
+    if not force and not should_install_blocker():
         return
 
     from provide.testkit._blocker import SetproctitleImportBlocker
