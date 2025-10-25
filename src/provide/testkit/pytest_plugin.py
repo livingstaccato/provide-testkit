@@ -21,12 +21,7 @@ This approach is clean because:
 
 from __future__ import annotations
 
-# Re-export the blocker class for backwards compatibility
-from provide.testkit._blocker import SetproctitleImportBlocker
-
-
 # Install the import hook ONLY when running under pytest
-# Use centralized installation logic
 from provide.testkit._install_blocker import install_setproctitle_blocker
 
 install_setproctitle_blocker()
