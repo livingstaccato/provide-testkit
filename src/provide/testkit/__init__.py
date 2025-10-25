@@ -40,11 +40,22 @@ with open(_debug_file, "a") as f:
 
 from provide.testkit.pytest_plugin import SetproctitleImportBlocker
 
-if not any(isinstance(hook, SetproctitleImportBlocker) for hook in sys.meta_path):
+# Only install blocker when running under pytest
+_is_pytest_context = (
+    "PYTEST_CURRENT_TEST" in os.environ  # Running under pytest
+    or "pytest" in sys.modules  # pytest is already imported
+    or any("pytest" in arg for arg in sys.argv)  # pytest in command line
+)
+
+if _is_pytest_context and not any(isinstance(hook, SetproctitleImportBlocker) for hook in sys.meta_path):
     with open(_debug_file, "a") as f:
         f.write(f"🐛 [PID {_pid}] Installing SetproctitleImportBlocker (fallback)\n")
         f.flush()
     sys.meta_path.insert(0, SetproctitleImportBlocker())
+elif not _is_pytest_context:
+    with open(_debug_file, "a") as f:
+        f.write(f"🐛 [PID {_pid}] Skipping SetproctitleImportBlocker (not in pytest context)\n")
+        f.flush()
 else:
     with open(_debug_file, "a") as f:
         f.write(f"🐛 [PID {_pid}] SetproctitleImportBlocker already installed (likely via .pth early init)\n")
