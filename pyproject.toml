@@ -223,11 +223,11 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 packages = {find = {where = ["src"]}}
 
-# Install .pth file to site-packages root for early initialization
-# The .pth file is executed during Python site initialization,
-# before any user code runs, enabling the setproctitle blocker
-[tool.setuptools.data-files]
-"." = ["src/provide_testkit_init.pth"]
+# Include .pth file as package data
+# It will be installed inside the provide.testkit package
+# We'll symlink/copy it to site-packages root via entry point
+[tool.setuptools.package-data]
+"provide.testkit" = ["*.pth"]
 
 [tool.setuptools.dynamic]
 version = {file = "VERSION"}
