@@ -36,8 +36,13 @@ def install_pth_file(*, verbose: bool = False) -> int:
             python_version = f"python{sys.version_info.major}.{sys.version_info.minor}"
             site_packages = Path(sys.prefix) / "lib" / python_version / "site-packages"
 
-    # Source .pth file (in package)
-    pth_source = Path(__file__).parent / "provide_testkit_init.pth"
+    # Source .pth file (in src/ root for setuptools data-files)
+    # The file is stored at src/provide_testkit_init.pth for proper installation
+    pth_source = Path(__file__).parent.parent.parent / "provide_testkit_init.pth"
+
+    # Fallback to old location for backward compatibility
+    if not pth_source.exists():
+        pth_source = Path(__file__).parent / "provide_testkit_init.pth"
 
     # Destination .pth file (in site-packages root)
     pth_dest = site_packages / "provide_testkit_init.pth"
