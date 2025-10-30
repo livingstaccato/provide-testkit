@@ -26,7 +26,8 @@
       "Bash(.venv/bin/provide-testkit-uninstall-pth:*)",
       "Bash(.venv/bin/pytest tests/test_flavorpack_client.py -n 4 -v)",
       "Bash(.venv/bin/pytest tests/ -k \"client\" -n auto --maxfail=3)",
-      "Bash(.venv/bin/pytest tests/ -n auto --maxfail=5 -x)"
+      "Bash(.venv/bin/pytest tests/ -n auto --maxfail=5 -x)",
+      "Bash(.venv/bin/pytest:*)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"

@@ -1,6 +1,5 @@
 Documentation Coverage Report - documentation
 ==================================================
-Status: ❌ FAILED
 Grade: B-
 Coverage: 75.0%
 Score: 80.0%
