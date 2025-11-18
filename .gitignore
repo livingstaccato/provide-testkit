@@ -1,0 +1,89 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.venv
+workenv/
+
+# Testing
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.hypothesis/
+junit.xml
+
+# Quality reports
+quality-reports/
+.quality-artifacts/
+
+# Provide ecosystem directories (gitignored)
+.provide/shared/
+.provide/output/
+.provide/logs/
+.provide/cache/
+
+# Log files
+*.log
+*.log.*
+logs/
+
+# Local/temporary files
+*.local
+*.local.*
+.*.local
+*.bak
+*.tmp
+
+# Profiling
+*.prof
+memray-*.bin
+
+# Type checking / linting
+.mypy_cache/
+.ruff_cache/
+
+# IDE
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# MkDocs
+/site
+docs/.shared-theme/
+
+# Terraform state
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Bfiles artifacts
+*.bf.txt
+bf-*
+*bfile*
+
+# Provide tooling
+# Note: .provide/ subdirs (shared/, output/, logs/, cache/) are gitignored above
+# Config dirs (security/, foundry/) are versioned
+
+# Project specific
+.note
+vendor
+certs
+kv-data-*
+bin/
+.secrets
+.env.local

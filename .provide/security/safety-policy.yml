@@ -1,0 +1,75 @@
+# Safety Policy Configuration for provide-testkit
+# https://docs.safetycli.com/safety-docs/safety-policy-file
+
+version: "3.0"
+
+# Security policy for dependency scanning
+security:
+  # Continue scanning even if vulnerabilities are found
+  continue-on-vulnerability-error: false
+
+  # Ignore vulnerabilities with CVSS score below this threshold
+  # Scale: 0.0 (no impact) to 10.0 (critical)
+  ignore-cvss-severity-below: 0.0
+
+  # Whether to ignore vulnerabilities with unknown CVSS scores
+  ignore-cvss-unknown-severity: false
+
+  # Ignore specific vulnerability IDs (use sparingly)
+  # These should be documented with justification
+  ignore-vulnerabilities:
+    # Example: Ignore a specific vulnerability with justification
+    # - id: "12345"
+    #   reason: "Not exploitable in our use case - only affects Windows"
+    #   expires: "2025-12-31"
+
+  # Package-specific ignores
+  ignore-packages:
+    # Example: Ignore vulnerabilities in development-only packages
+    # - package: "some-dev-tool"
+    #   reason: "Development tool only, not in production"
+
+# Scanning configuration
+scan:
+  # Maximum depth for dependency tree analysis
+  max-depth: 6
+
+  # Include paths for scanning
+  include-files:
+    - "requirements.txt"
+    - "pyproject.toml"
+    - "setup.py"
+    - "Pipfile.lock"
+
+  # Exclude paths from scanning
+  exclude:
+    - ".venv/"
+    - "venv/"
+    - "node_modules/"
+    - "tests/"
+    - ".git/"
+
+# Reporting configuration
+report:
+  # Output format (text, json, html, screen)
+  format: "text"
+
+  # Show full advisory details
+  full-report: true
+
+  # Include only production dependencies (not dev)
+  # production-only: true
+
+# Alert thresholds for CI/CD
+alerts:
+  # Fail if any critical vulnerabilities found
+  critical: 0
+
+  # Fail if more than N high severity vulnerabilities
+  high: 0
+
+  # Warning threshold for medium severity
+  medium: 5
+
+  # Info threshold for low severity (no failure)
+  low: 10

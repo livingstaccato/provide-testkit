@@ -1,0 +1,43 @@
+# TruffleHog Configuration for provide-testkit
+# https://github.com/trufflesecurity/trufflehog
+
+# Exclude paths from scanning
+exclude_paths:
+  - "**/crypto/fixtures.py"      # Test crypto fixtures
+  - "**/test_*.py"               # Test files
+  - "**/*_test.py"               # Test files
+  - "**/tests/**"                # Test directories
+  - "**/*bfiles*.txt"            # Bfiles documentation
+  - "**/.venv/**"                # Virtual environments
+  - "**/venv/**"                 # Virtual environments
+  - "**/__pycache__/**"          # Python cache
+  - "**/site-packages/**"        # Installed packages
+  - "**/.security/**"            # Security scan artifacts
+  - "**/.git/**"                 # Git internals
+  - "**/node_modules/**"         # Node modules
+  - "**/.provide/security/**"    # Security config itself
+
+# Detector configuration
+# Reference: https://trufflesecurity.github.io/trufflehog/detector_list/
+detectors:
+  # Enable all detectors by default
+  enable_all: true
+
+  # Disable specific detectors if needed
+  # disable:
+  #   - "AWS"
+  #   - "GCP"
+
+# Verification settings
+verification:
+  # Set to true to only report verified (active) secrets
+  only_verified: false
+
+  # Set to true to disable verification entirely (faster but less accurate)
+  no_verification: false
+
+# Performance tuning
+concurrency: 10
+
+# Output settings
+print_avg_detector_time: false

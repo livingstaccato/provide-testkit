@@ -1,0 +1,66 @@
+# Bandit Configuration for provide-testkit
+# Can be used directly or merged into pyproject.toml under [tool.bandit]
+# https://bandit.readthedocs.io/en/latest/config.html
+
+[tool.bandit]
+# Directories to exclude from scanning
+exclude_dirs = [
+    "tests",
+    ".venv",
+    "venv",
+    "__pycache__",
+    "build",
+    "dist",
+    ".git",
+    "site-packages",
+    ".security",
+    ".provide",
+]
+
+# Specific tests to skip (by test ID)
+# Reference: https://bandit.readthedocs.io/en/latest/plugins/index.html
+skips = [
+    # "B101",  # assert_used - useful in production code
+    # "B311",  # random - only skip if you know what you're doing
+]
+
+# Tests to run (leave empty for all)
+# tests = ["B201", "B301"]
+
+# Severity threshold (LOW, MEDIUM, HIGH)
+severity = "LOW"
+
+# Confidence threshold (LOW, MEDIUM, HIGH)
+confidence = "MEDIUM"
+
+# Maximum number of lines of code to analyze per file
+# max_lines = -1  # -1 means no limit
+
+# Recursive scanning
+recursive = true
+
+# Output format options
+# format = "json"
+
+# Aggregate results by vulnerability type
+aggregate = "file"
+
+# Quiet mode (less verbose output)
+quiet = false
+
+# Custom baseline file for ignoring known issues
+# baseline = ".provide/security/bandit-baseline.json"
+
+# Profile to use (default profiles: ShellInjection, SqlInjection, etc.)
+# profile = "provide"
+
+# Custom plugin paths
+# plugin_paths = []
+
+[tool.bandit.assert_used]
+# Configure specific test behavior
+skips = ["**/test_*.py", "**/*_test.py"]
+
+[tool.bandit.hardcoded_password_string]
+# Ignore test files for hardcoded passwords
+skips = ["**/test_*.py", "**/*_test.py", "**/fixtures.py"]

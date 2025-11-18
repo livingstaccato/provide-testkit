@@ -1,0 +1,81 @@
+# Checkov Configuration for provide-testkit
+# https://www.checkov.io/2.Basics/CLI%20Command%20Reference.html
+
+# Framework selection
+# Options: all, terraform, cloudformation, kubernetes, dockerfile, etc.
+framework:
+  - all
+
+# Paths to skip during scanning
+skip-path:
+  - tests/
+  - .venv/
+  - venv/
+  - __pycache__/
+  - build/
+  - dist/
+  - .git/
+  - site-packages/
+  - .security/
+  - node_modules/
+  - .terraform/
+
+# Specific checks to skip (by check ID)
+# Reference: https://www.checkov.io/5.Policy%20Index/all.html
+skip-check:
+  # Skip low severity or noisy checks if needed
+  # - CKV_DOCKER_3    # Ensure that HEALTHCHECK instructions have been added
+  # - CKV_K8S_8       # Ensure liveness probe is configured
+
+# Specific checks to run (leave empty for all)
+# check:
+#   - CKV_AWS_1
+#   - CKV_DOCKER_1
+
+# Soft fail mode (exit 0 even if checks fail)
+soft-fail: false
+
+# Compact output (less verbose)
+compact: true
+
+# Quiet mode (minimal output)
+quiet: false
+
+# Severity threshold (CRITICAL, HIGH, MEDIUM, LOW)
+# Only report issues at or above this level
+severity-threshold: LOW
+
+# Custom policy paths
+# external-checks-dir:
+#   - .provide/security/custom-checks/checkov/
+
+# Repository ID for Prisma Cloud integration
+# repo-id: provide-io/provide-testkit
+
+# Branch name for tracking
+# branch: main
+
+# Output format (cli, json, junitxml, github_failed_only, sarif, cyclonedx)
+output: cli
+
+# Enable specific frameworks
+# enable-secret-scan-all-files: false
+
+# Terraform-specific settings
+# download-external-modules: false
+# var-file:
+#   - variables.tfvars
+
+# Policy-as-code settings
+# bc-api-key: ""  # DO NOT commit API keys here
+
+# Baseline file to ignore known issues
+# baseline: .provide/security/checkov-baseline.json
+
+# Hard fail on specific check types
+# hard-fail-on:
+#   - CKV_DOCKER_2
+
+# Soft fail on specific check types (override hard fail)
+# soft-fail-on:
+#   - CKV_K8S_20

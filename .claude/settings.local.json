@@ -1,0 +1,46 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm:*)",
+      "Read(//Users/tim/code/gh/**)",
+      "Read(//Users/tim/code/**)",
+      "WebSearch",
+      "Bash(python3:*)",
+      "Read(//private/tmp/**)",
+      "Bash(uv run pytest:*)",
+      "Bash(uv pip install:*)",
+      "Bash(cp:*)",
+      "Bash(cat:*)",
+      "Bash(TESTKIT_PTH_LOG=1 python3:*)",
+      "Bash(uv build:*)",
+      "Bash(uv pip uninstall:*)",
+      "Bash(source .venv/bin/activate)",
+      "Bash(.venv/bin/pip:*)",
+      "Bash(TESTKIT_PTH_LOG=1 .venv/bin/python3:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:peps.python.org)",
+      "Bash(.venv/bin/provide-testkit-install-pth:*)",
+      "Bash(.venv/bin/python3:*)",
+      "Bash(.venv/bin/pytest tests/ -k \"test_auth\" -n 4 -v)",
+      "Bash(.venv/bin/pytest tests/ -k \"test_auth\" -n 2 -v)",
+      "Bash(.venv/bin/provide-testkit-uninstall-pth:*)",
+      "Bash(.venv/bin/pytest tests/test_flavorpack_client.py -n 4 -v)",
+      "Bash(.venv/bin/pytest tests/ -k \"client\" -n auto --maxfail=3)",
+      "Bash(.venv/bin/pytest tests/ -n auto --maxfail=5 -x)",
+      "Bash(.venv/bin/pytest:*)",
+      "Bash(uv run python:*)",
+      "Bash(uv run ruff format:*)",
+      "Bash(uv run ruff check:*)",
+      "Bash(uv run mypy:*)",
+      "Bash(.venv/bin/ruff format src/provide/testkit/chaos/concurrency_strategies.py src/provide/testkit/chaos/io_strategies.py)",
+      "Bash(.venv/bin/ruff check:*)",
+      "Bash(.venv/bin/mypy src/provide/testkit/chaos/concurrency_strategies.py src/provide/testkit/chaos/io_strategies.py)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nFix Hypothesis health check failures in chaos strategies\n\nResolve slow input generation issues in property-based tests by:\n- Adding @settings(max_examples=50) to strategies with complex generation\n- Limiting iteration counts in loop-based strategies to reduce complexity\n- Ensuring unique constraints are only applied when they''re satisfiable\n- Simplifying string generation in path_traversal_patterns\n- Adding allow_nan=False and allow_infinity=False to float strategies\n- Restructuring dependent draws in network_error_patterns\n\nAll 6 previously failing tests now pass, and full test suite (77 tests) passes.\n\n🤖 Generated with Claude Code\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(.venv/bin/ruff format:*)"
+    ],
+    "additionalDirectories": [
+      "/Users/tim/code/gh/provide-io"
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+# GitLeaks Configuration for provide-testkit
+# https://github.com/gitleaks/gitleaks
+
+title = "provide-testkit gitleaks config"
+
+# Global allowlist - patterns to ignore across all rules
+[allowlist]
+description = "Allowlist for test fixtures and known false positives"
+
+# Path patterns to ignore (regex patterns for GitLeaks)
+paths = [
+    '''crypto/fixtures\.py$''',             # Test crypto fixtures with sample keys
+    '''fixtures\.py$''',                    # Any fixtures file
+    '''test_.*\.py$''',                     # Test files
+    '''.*_test\.py$''',                     # Test files (alternative pattern)
+    '''/tests/''',                          # Test directories
+    '''bfiles.*\.txt$''',                   # Bfiles extracts (documentation)
+    '''\.venv/''',                          # Virtual environments
+    '''/venv/''',                           # Virtual environments
+    '''__pycache__/''',                     # Python cache
+    '''site-packages/''',                   # Installed packages
+    '''\.security/''',                      # Security scan artifacts
+]
+
+# Regex patterns to ignore in content
+regexes = [
+    '''-----BEGIN EC PRIVATE KEY-----\nMIGkAgEBBDAkxo19Kcz''',  # Test fixture key 1
+    '''-----BEGIN EC PRIVATE KEY-----\nMIGkAgEBBDDZ1MORWFV''',  # Test fixture key 2
+]
+
+# Stop words that indicate test/example data
+stopwords = [
+    "example",
+    "sample",
+    "test",
+    "dummy",
+    "fake",
+    "mock",
+    "placeholder",
+]
+
+# Extend the default gitleaks rules
+# Reference: https://github.com/gitleaks/gitleaks/tree/master/config/gitleaks.toml
+
+# Custom rule to detect high-entropy strings (can be tuned)
+[[rules]]
+id = "high-entropy-base64"
+description = "High entropy base64 string (potential secret)"
+regex = '''[A-Za-z0-9+/]{40,}={0,2}'''
+entropy = 4.5
+keywords = ["key", "secret", "token", "password", "credential"]
+
+# Override default private key rule to be less strict for test files
+[[rules]]
+id = "private-key"
+description = "Private Key detected"
+regex = '''-----BEGIN (RSA|EC|DSA|OPENSSH|PGP) PRIVATE KEY( BLOCK)?-----'''
+keywords = ["BEGIN"]
+
+[rules.allowlist]
+paths = [
+    '''crypto/''',
+    '''fixtures''',
+    '''test_''',
+    '''bfiles''',
+]
