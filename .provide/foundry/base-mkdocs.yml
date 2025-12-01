@@ -117,12 +117,6 @@ plugins:
   - htmlproofer:
       # Warn only for local development, can be overridden in CI
       raise_error: false
-      # Exclude common patterns that cause false positives
-      raise_error_excludes:
-        - "*localhost*"
-        - "*127.0.0.1*"
-        - "*example.com*"
-        - "*example.org*"
       # Validation options
       validate_rendered_template: true
       validate_external_urls: false  # External links checked separately in CI
