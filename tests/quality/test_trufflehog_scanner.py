@@ -54,7 +54,9 @@ class TestTruffleHogAvailability:
 
 
 @pytest.mark.skipif(
-    not pytest.importorskip("provide.testkit.quality.security.trufflehog_scanner", reason="Module not available").TRUFFLEHOG_AVAILABLE,
+    not pytest.importorskip(
+        "provide.testkit.quality.security.trufflehog_scanner", reason="Module not available"
+    ).TRUFFLEHOG_AVAILABLE,
     reason="TruffleHog not installed",
 )
 class TestTruffleHogScanner:
@@ -150,9 +152,7 @@ class TestTruffleHogScannerMocked:
             "DetectorName": "SSH",
             "Verified": False,
             "Redacted": "-----BEGIN PRIVATE KEY-----",
-            "SourceMetadata": {
-                "Data": {"Filesystem": {"file": "test.key", "line": 1}}
-            },
+            "SourceMetadata": {"Data": {"Filesystem": {"file": "test.key", "line": 1}}},
             "ExtraData": {},
         }
         mock_run.return_value = Mock(returncode=1, stdout=json.dumps(finding) + "\n", stderr="")
@@ -178,9 +178,7 @@ class TestTruffleHogScannerMocked:
             "DetectorName": "AWS Access Key",
             "Verified": True,
             "Redacted": "AKIA****************",
-            "SourceMetadata": {
-                "Data": {"Filesystem": {"file": "config.py", "line": 10}}
-            },
+            "SourceMetadata": {"Data": {"Filesystem": {"file": "config.py", "line": 10}}},
             "ExtraData": {"account": "123456789"},
         }
         mock_run.return_value = Mock(returncode=1, stdout=json.dumps(finding) + "\n", stderr="")
@@ -237,14 +235,16 @@ class TestTruffleHogScannerMocked:
     def test_analyze_with_invalid_json_lines(self, mock_run: Mock, tmp_path: Path) -> None:
         """Test analyze handles invalid JSON lines gracefully."""
         # Mix of valid and invalid JSON
-        output = "invalid json\n" + json.dumps({
-            "DetectorType": "Generic",
-            "DetectorName": "Secret",
-            "Verified": False,
-            "Redacted": "xxx",
-            "SourceMetadata": {"Data": {"Filesystem": {"file": "f", "line": 1}}},
-            "ExtraData": {},
-        })
+        output = "invalid json\n" + json.dumps(
+            {
+                "DetectorType": "Generic",
+                "DetectorName": "Secret",
+                "Verified": False,
+                "Redacted": "xxx",
+                "SourceMetadata": {"Data": {"Filesystem": {"file": "f", "line": 1}}},
+                "ExtraData": {},
+            }
+        )
         mock_run.return_value = Mock(returncode=1, stdout=output, stderr="")
 
         from provide.testkit.quality.security.trufflehog_scanner import TruffleHogScanner
