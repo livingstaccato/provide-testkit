@@ -61,8 +61,10 @@ class TestGitLeaksAvailability:
 class TestGitLeaksScanner:
     """Tests for GitLeaks scanner (requires gitleaks to be installed)."""
 
-    def test_scanner_initialization(self) -> None:
+    def test_scanner_initialization(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
         """Test scanner can be initialized."""
+        # Run in isolated directory to avoid auto-detecting config files
+        monkeypatch.chdir(tmp_path)
         scanner = GitLeaksScanner()
         assert scanner.config == {}
         assert scanner.artifact_dir is None

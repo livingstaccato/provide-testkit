@@ -60,8 +60,10 @@ class TestTruffleHogAvailability:
 class TestTruffleHogScanner:
     """Test TruffleHog scanner with real binary (if available)."""
 
-    def test_scanner_initialization(self) -> None:
+    def test_scanner_initialization(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
         """Test scanner initialization."""
+        # Run in isolated directory to avoid auto-detecting config files
+        monkeypatch.chdir(tmp_path)
         from provide.testkit.quality.security.trufflehog_scanner import TruffleHogScanner
 
         scanner = TruffleHogScanner()
