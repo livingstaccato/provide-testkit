@@ -18,10 +18,10 @@ Usage:
 
 from __future__ import annotations
 
-import re
-import sys
 from pathlib import Path
+import re
 from re import Pattern
+import sys
 from typing import Any
 
 try:
@@ -166,9 +166,7 @@ def main() -> int:
     total_files_changed = 0
 
     # Process provider guides if requested or if no target specified
-    if process_guides or not any(
-        arg in sys.argv for arg in ["--components", "--guides", "--provider-guides"]
-    ):
+    if process_guides or not any(arg in sys.argv for arg in ["--components", "--guides", "--provider-guides"]):
         provider_guides_dir = project_root / "plating" / "guides"
         provider_partials_dir = project_root / "plating" / "partials"
 
@@ -204,9 +202,7 @@ def main() -> int:
             print(f"📚 Using partials from: {partials_dir}")
             print()
 
-            files_changed = inject_global_partials(
-                docs_dir, partials_dir, dry_run, file_pattern="*.md"
-            )
+            files_changed = inject_global_partials(docs_dir, partials_dir, dry_run, file_pattern="*.md")
             total_files_changed += files_changed
             print()
 
@@ -366,8 +362,7 @@ def _rebuild_content(original: str, body: str, has_frontmatter: bool) -> str:
 def _has_header(body: str) -> bool:
     """Return True if a global header already exists."""
     return (
-        "<!-- Injected from global partial: _global_header.md -->" in body
-        or "POC (proof-of-concept)" in body
+        "<!-- Injected from global partial: _global_header.md -->" in body or "POC (proof-of-concept)" in body
     )
 
 

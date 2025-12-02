@@ -118,13 +118,10 @@ def _validate_project_configs() -> list[tuple[str, list[str], list[str]]]:
                 project_errors.append(f"{project_name}: Error reading mkdocs.yml: {exc}")
             else:
                 if "INHERIT:" not in content:
-                    project_errors.append(
-                        f"{project_name}: Missing INHERIT directive in mkdocs.yml"
-                    )
+                    project_errors.append(f"{project_name}: Missing INHERIT directive in mkdocs.yml")
                 elif ".provide/foundry/base-mkdocs.yml" not in content:
                     project_errors.append(
-                        f"{project_name}: INHERIT directive does not point to "
-                        ".provide/foundry/base-mkdocs.yml"
+                        f"{project_name}: INHERIT directive does not point to .provide/foundry/base-mkdocs.yml"
                     )
 
                 for field in required_fields:
@@ -200,16 +197,14 @@ def _inspect_project_structure() -> list[tuple[list[str], list[str]]]:
                 for match in docs_path.glob(pattern):
                     rel_path = match.relative_to(project_path)
                     errors.append(
-                        f"{project_name}: Planning document found in docs/: {rel_path} "
-                        "(should be in .dev/)"
+                        f"{project_name}: Planning document found in docs/: {rel_path} (should be in .dev/)"
                     )
 
             for pattern in session_patterns:
                 for match in docs_path.rglob(pattern):
                     rel_path = match.relative_to(project_path)
                     errors.append(
-                        f"{project_name}: Session file found in docs/: {rel_path} "
-                        "(should be in .archive/)"
+                        f"{project_name}: Session file found in docs/: {rel_path} (should be in .archive/)"
                     )
 
         results.append((warnings, errors))
@@ -313,8 +308,7 @@ def check_file_links(file_path: Path, docs_dir: Path) -> list[str]:
                         if anchor not in target_headings:
                             rel_source = file_path.relative_to(docs_dir)
                             errors.append(
-                                f"{rel_source}:{line_num}: Broken anchor link "
-                                f"'#{anchor}' in '{link_path_str}'"
+                                f"{rel_source}:{line_num}: Broken anchor link '#{anchor}' in '{link_path_str}'"
                             )
             except Exception as e:
                 rel_source = file_path.relative_to(docs_dir)
@@ -323,9 +317,7 @@ def check_file_links(file_path: Path, docs_dir: Path) -> list[str]:
             # Just an anchor link (same file)
             if anchor and anchor not in file_headings:
                 rel_source = file_path.relative_to(docs_dir)
-                errors.append(
-                    f"{rel_source}:{line_num}: Broken anchor link '#{anchor}' in same file"
-                )
+                errors.append(f"{rel_source}:{line_num}: Broken anchor link '#{anchor}' in same file")
 
     return errors
 
@@ -386,9 +378,7 @@ def verify_links() -> int:
 
 def main() -> int:
     """Main entry point."""
-    parser = argparse.ArgumentParser(
-        description="Validate documentation configuration, structure, and links"
-    )
+    parser = argparse.ArgumentParser(description="Validate documentation configuration, structure, and links")
     parser.add_argument(
         "command",
         choices=["verify-config", "check-structure", "verify-links"],

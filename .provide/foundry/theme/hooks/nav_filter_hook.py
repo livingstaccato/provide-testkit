@@ -92,9 +92,7 @@ def should_hide_nav_item(item: Any, hidden_paths: list[str]) -> bool:
     # Check children if this is a section
     if hasattr(item, "children") and item.children:
         # If ALL children are hidden, hide the parent too
-        all_children_hidden = all(
-            should_hide_nav_item(child, hidden_paths) for child in item.children
-        )
+        all_children_hidden = all(should_hide_nav_item(child, hidden_paths) for child in item.children)
         if all_children_hidden:
             return True
 

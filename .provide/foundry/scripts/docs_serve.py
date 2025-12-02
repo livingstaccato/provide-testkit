@@ -20,9 +20,7 @@ def find_available_port(start_port: int = 11000) -> int:
         except OSError:
             continue
 
-    raise RuntimeError(
-        f"No available ports in range {start_port}-{start_port + 100}"
-    )
+    raise RuntimeError(f"No available ports in range {start_port}-{start_port + 100}")
 
 
 def main() -> int:
