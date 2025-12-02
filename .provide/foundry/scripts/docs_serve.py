@@ -27,8 +27,10 @@ def find_available_port(start_port: int = 11000) -> int:
 
 def main() -> int:
     """Serve documentation with smart port detection."""
-    # Run preflight check
-    result = subprocess.run([sys.executable, "scripts/docs_preflight.py"])
+    # Run preflight check - use script's directory to find sibling script
+    script_dir = Path(__file__).parent
+    preflight_script = script_dir / "docs_preflight.py"
+    result = subprocess.run([sys.executable, str(preflight_script)])
     if result.returncode != 0:
         return 1
 
