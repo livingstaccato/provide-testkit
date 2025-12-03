@@ -77,6 +77,10 @@ theme:
     # Announce
     - announce.dismiss
 
+# Hooks for global functionality
+hooks:
+  - .provide/foundry/theme/hooks/global_partials_hook.py
+
 # Plugins Configuration
 plugins:
   - search:
