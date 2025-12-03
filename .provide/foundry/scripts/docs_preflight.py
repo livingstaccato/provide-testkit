@@ -3,8 +3,8 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 import sys
+from pathlib import Path
 
 
 def check_docs_ready() -> tuple[bool, list[str]]:
