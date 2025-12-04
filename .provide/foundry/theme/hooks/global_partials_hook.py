@@ -10,8 +10,8 @@ This hook:
 
 from __future__ import annotations
 
-import re
 from pathlib import Path
+import re
 from typing import Any
 
 # Cache for partial contents

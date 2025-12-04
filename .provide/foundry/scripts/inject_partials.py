@@ -18,10 +18,10 @@ Usage:
 
 from __future__ import annotations
 
-import re
-import sys
 from pathlib import Path
+import re
 from re import Pattern
+import sys
 from typing import Any
 
 try:
