@@ -37,7 +37,13 @@
       "Bash(.venv/bin/mypy src/provide/testkit/chaos/concurrency_strategies.py src/provide/testkit/chaos/io_strategies.py)",
       "Bash(git add:*)",
       "Bash(git commit -m \"$(cat <<''EOF''\nFix Hypothesis health check failures in chaos strategies\n\nResolve slow input generation issues in property-based tests by:\n- Adding @settings(max_examples=50) to strategies with complex generation\n- Limiting iteration counts in loop-based strategies to reduce complexity\n- Ensuring unique constraints are only applied when they''re satisfiable\n- Simplifying string generation in path_traversal_patterns\n- Adding allow_nan=False and allow_infinity=False to float strategies\n- Restructuring dependent draws in network_error_patterns\n\nAll 6 previously failing tests now pass, and full test suite (77 tests) passes.\n\n🤖 Generated with Claude Code\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(.venv/bin/ruff format:*)"
+      "Bash(.venv/bin/ruff format:*)",
+      "Bash(FOUNDATION_LOG_LEVEL=WARNING python3:*)",
+      "Bash(FOUNDATION_LOG_OUTPUT=stderr python3:*)",
+      "Bash(/Users/tim/code/gh/provide-io/provide-testkit/.venv/bin/pip install:*)",
+      "Bash(ls:*)",
+      "Bash(/Users/tim/.local/share/uv/python/cpython-3.13.3-macos-aarch64-none/bin/python3:*)",
+      "Bash(PYTHONPATH=/Users/tim/code/gh/provide-io/provide-foundation/src /Users/tim/.local/share/uv/python/cpython-3.13.3-macos-aarch64-none/bin/python3:*)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
