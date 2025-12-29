@@ -43,7 +43,10 @@
       "Bash(/Users/tim/code/gh/provide-io/provide-testkit/.venv/bin/pip install:*)",
       "Bash(ls:*)",
       "Bash(/Users/tim/.local/share/uv/python/cpython-3.13.3-macos-aarch64-none/bin/python3:*)",
-      "Bash(PYTHONPATH=/Users/tim/code/gh/provide-io/provide-foundation/src /Users/tim/.local/share/uv/python/cpython-3.13.3-macos-aarch64-none/bin/python3:*)"
+      "Bash(PYTHONPATH=/Users/tim/code/gh/provide-io/provide-foundation/src /Users/tim/.local/share/uv/python/cpython-3.13.3-macos-aarch64-none/bin/python3:*)",
+      "Bash(uv pip list:*)",
+      "Bash(uv pip show:*)",
+      "Bash(uv pip check:*)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
