@@ -46,7 +46,9 @@
       "Bash(PYTHONPATH=/Users/tim/code/gh/provide-io/provide-foundation/src /Users/tim/.local/share/uv/python/cpython-3.13.3-macos-aarch64-none/bin/python3:*)",
       "Bash(uv pip list:*)",
       "Bash(uv pip show:*)",
-      "Bash(uv pip check:*)"
+      "Bash(uv pip check:*)",
+      "Bash(uv pip index:*)",
+      "Bash(we test:*)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
