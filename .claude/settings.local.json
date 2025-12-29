@@ -48,7 +48,14 @@
       "Bash(uv pip show:*)",
       "Bash(uv pip check:*)",
       "Bash(uv pip index:*)",
-      "Bash(we test:*)"
+      "Bash(we test:*)",
+      "Bash(do if [ -f \"$dir/pyproject.toml\" ])",
+      "Bash(then echo \"$dir\")",
+      "Bash(= */pyproject.toml)",
+      "Bash(do echo -e '\\\\n## $dep')",
+      "Bash(^from \"attrs wrknv/src/ 2>/dev/null | wc -l | xargs\\)\")",
+      "Bash(^from \"click wrknv/src/ 2>/dev/null | wc -l | xargs\\)\")",
+      "Bash(^from click\" tofusoup/src/ 2>/dev/null | wc -l | xargs\\)\")"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"

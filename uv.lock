@@ -2726,7 +2726,7 @@ requires-dist = [
     { name = "freezegun", marker = "extra == 'advanced-testing'" },
     { name = "griffe", marker = "extra == 'docs'" },
     { name = "grpc-stubs", marker = "extra == 'grpc'" },
-    { name = "grpcio", marker = "extra == 'grpc'" },
+    { name = "grpcio", marker = "extra == 'grpc'", specifier = ">=1.76.0" },
     { name = "grpcio-health-checking", marker = "extra == 'grpc'" },
     { name = "grpcio-tools", marker = "extra == 'grpc'" },
     { name = "h2", marker = "extra == 'transport'" },
