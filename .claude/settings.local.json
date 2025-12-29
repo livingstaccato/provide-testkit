@@ -55,7 +55,20 @@
       "Bash(do echo -e '\\\\n## $dep')",
       "Bash(^from \"attrs wrknv/src/ 2>/dev/null | wc -l | xargs\\)\")",
       "Bash(^from \"click wrknv/src/ 2>/dev/null | wc -l | xargs\\)\")",
-      "Bash(^from click\" tofusoup/src/ 2>/dev/null | wc -l | xargs\\)\")"
+      "Bash(^from click\" tofusoup/src/ 2>/dev/null | wc -l | xargs\\)\")",
+      "Bash(git -C /Users/tim/code/gh/provide-io log --all --oneline --since=\"2 hours ago\" --author=\"Claude\")",
+      "Bash(git -C wrknv diff pyproject.toml)",
+      "Bash(git -C provide-testkit diff pyproject.toml)",
+      "Bash(git -C wrknv log --oneline -10)",
+      "Bash(git -C provide-testkit log --oneline -10)",
+      "Bash(git -C provide-workspace log --oneline -5)",
+      "Bash(git -C terraform-provider-pyvider log --oneline -5)",
+      "Bash(git -C wrknv show:*)",
+      "Bash(git -C provide-workspace show HEAD:pyproject.toml)",
+      "Bash(git -C terraform-provider-pyvider show:*)",
+      "Bash(do grep -q \"Python :: 3.14\" \"$dir/pyproject.toml\")",
+      "Bash(do grep -q \"^strict = true\" \"$dir/pyproject.toml\")",
+      "Bash(do grep -q \"fail_under = 70\" \"$dir/pyproject.toml\")"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
