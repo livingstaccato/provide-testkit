@@ -81,7 +81,14 @@
       "Bash([ -f \"$pkg/.github/workflows/ci.yml\" ])",
       "Bash([ -d \"$pkg/.github/workflows\" ])",
       "Bash(then echo \"✓ $pkg - has .github/workflows\")",
-      "Bash(else echo \"✗ $pkg - NO CI\")"
+      "Bash(else echo \"✗ $pkg - NO CI\")",
+      "Bash(if [ -d \"$pkg/.github/workflows\" ])",
+      "Bash(then gh run list --repo provide-io/$pkg --limit 1)",
+      "Bash(else echo \"No .github/workflows\")",
+      "Bash(gh run list:*)",
+      "Bash(do echo '=== $pkg ===' cd $pkg echo Tests: if [ -d tests ])",
+      "Bash(then echo '  Has tests/ directory' find tests -name test_*.py -o -name *_test.py)",
+      "Bash(gh run view:*)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
