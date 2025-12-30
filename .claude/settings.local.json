@@ -68,7 +68,20 @@
       "Bash(git -C terraform-provider-pyvider show:*)",
       "Bash(do grep -q \"Python :: 3.14\" \"$dir/pyproject.toml\")",
       "Bash(do grep -q \"^strict = true\" \"$dir/pyproject.toml\")",
-      "Bash(do grep -q \"fail_under = 70\" \"$dir/pyproject.toml\")"
+      "Bash(do grep -q \"fail_under = 70\" \"$dir/pyproject.toml\")",
+      "Bash(do pkg=\"$dir%/\")",
+      "Bash(if [ -f \"$pkg/LICENSE\" ])",
+      "Bash([ -f \"$pkg/LICENSE.txt\" ])",
+      "Bash([ -f \"$pkg/LICENSE.md\" ])",
+      "Bash(then echo \"✓ $pkg\")",
+      "Bash(else echo \"✗ $pkg - MISSING LICENSE\")",
+      "Bash(if [ -f \"$pkg/README.md\" ])",
+      "Bash(else echo \"✗ $pkg - MISSING README\")",
+      "Bash(if [ -f \"$pkg/.github/workflows/test.yml\" ])",
+      "Bash([ -f \"$pkg/.github/workflows/ci.yml\" ])",
+      "Bash([ -d \"$pkg/.github/workflows\" ])",
+      "Bash(then echo \"✓ $pkg - has .github/workflows\")",
+      "Bash(else echo \"✗ $pkg - NO CI\")"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
