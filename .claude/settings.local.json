@@ -110,7 +110,12 @@
       "Bash(column:*)",
       "Bash(do echo '=== $dir ===' echo 'wrknv tasks available:' grep ^[tasks. $dir/wrknv.toml)",
       "Bash(pip index:*)",
-      "Bash(.venv/bin/wrknv run quality:*)"
+      "Bash(.venv/bin/wrknv run quality:*)",
+      "Bash(gh release:*)",
+      "Bash(we run quality)",
+      "Bash(time we run sequential_test)",
+      "Bash(time we run parallel_test)",
+      "Bash(we typecheck:*)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
