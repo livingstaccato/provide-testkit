@@ -133,7 +133,18 @@
       "Bash(paste:*)",
       "Bash(while read line)",
       "Bash(do echo \"$line\")",
-      "Bash(we run lint.fix)"
+      "Bash(we run lint.fix)",
+      "Bash(we run test:*)",
+      "Bash(.venv/bin/we:*)",
+      "Bash(wrknv --version:*)",
+      "Bash(.venv/bin/wrknv run:*)",
+      "Bash(PYTHONUNBUFFERED=1 .venv/bin/pytest:*)",
+      "Bash(WRKNV_DEBUG=1 we run test.parallel:*)",
+      "Bash(we run --help:*)",
+      "Bash(TESTKIT_PTH_LOG=1 .venv/bin/python:*)",
+      "Bash(TESTKIT_PTH_LOG=1 .venv/bin/pytest:*)",
+      "Bash(FOUNDATION_LOG_LEVEL=DEBUG .venv/bin/wrknv run:*)",
+      "Bash(TESTKIT_PTH_LOG=1 .venv/bin/wrknv run:*)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
