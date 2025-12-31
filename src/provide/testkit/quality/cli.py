@@ -160,7 +160,7 @@ def _build_gates_config(
     config: Path | None,
 ) -> dict[str, Any]:
     """Build gates configuration from CLI arguments and config file."""
-    gates = {}
+    gates: dict[str, Any] = {}
 
     # Add CLI-specified gates
     if coverage is not None:
