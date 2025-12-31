@@ -144,7 +144,8 @@
       "Bash(TESTKIT_PTH_LOG=1 .venv/bin/python:*)",
       "Bash(TESTKIT_PTH_LOG=1 .venv/bin/pytest:*)",
       "Bash(FOUNDATION_LOG_LEVEL=DEBUG .venv/bin/wrknv run:*)",
-      "Bash(TESTKIT_PTH_LOG=1 .venv/bin/wrknv run:*)"
+      "Bash(TESTKIT_PTH_LOG=1 .venv/bin/wrknv run:*)",
+      "Bash(we run test.fast tests/test_structlog_debug.py)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
