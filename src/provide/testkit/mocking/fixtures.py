@@ -88,7 +88,7 @@ def mock_factory() -> Callable[..., Mock]:
         }
         defaults.update(kwargs)
 
-        mock = Mock(name=name, **defaults)
+        mock: Mock = Mock(name=name, **defaults)
         return mock
 
     return _create_mock
