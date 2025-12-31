@@ -39,7 +39,7 @@ class AutoPatch:
     def object(self, target: Any, attribute: str, **kwargs: Any) -> Mock:
         """Patch an object's attribute."""
         patcher = patch.object(target, attribute, **kwargs)
-        mock = patcher.start()
+        mock: Mock = patcher.start()
         self.patches.append(patcher)
         return mock
 
