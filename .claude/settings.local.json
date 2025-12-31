@@ -132,7 +132,8 @@
       "Bash(uv run bandit:*)",
       "Bash(paste:*)",
       "Bash(while read line)",
-      "Bash(do echo \"$line\")"
+      "Bash(do echo \"$line\")",
+      "Bash(we run lint.fix)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
