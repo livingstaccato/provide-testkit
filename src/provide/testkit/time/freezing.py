@@ -9,7 +9,7 @@ Fixtures for freezing time and controlling time flow in tests."""
 
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Generator
 from contextlib import suppress
 import datetime
 
