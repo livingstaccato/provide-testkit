@@ -115,7 +115,12 @@
       "Bash(we run quality)",
       "Bash(time we run sequential_test)",
       "Bash(time we run parallel_test)",
-      "Bash(we typecheck:*)"
+      "Bash(we typecheck:*)",
+      "Bash(we format:*)",
+      "Bash(we lint)",
+      "Bash(we run format)",
+      "Bash(do echo \"=== $file.py ===\" grep \"async def read\" src/tofusoup/tf/components/data_sources/$file.py)",
+      "Bash(1)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"

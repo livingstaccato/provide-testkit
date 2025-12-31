@@ -118,7 +118,7 @@ def empty_cert() -> str:
 
 
 @pytest.fixture
-def temporary_cert_file(tmp_path: any, client_cert: Certificate) -> str:
+def temporary_cert_file(tmp_path: Path, client_cert: Certificate) -> str:
     """Creates a temporary file containing the client certificate."""
     cert_file = tmp_path / "client_cert.pem"
     cert_file.write_text(client_cert.cert_pem)
@@ -130,7 +130,7 @@ def temporary_cert_file(tmp_path: any, client_cert: Certificate) -> str:
 
 
 @pytest.fixture
-def temporary_key_file(tmp_path: any, client_cert: Certificate) -> str:
+def temporary_key_file(tmp_path: Path, client_cert: Certificate) -> str:
     """Creates a temporary file containing the client private key."""
     key_file = tmp_path / "client_key.pem"
     key_file.write_text(client_cert.key_pem)
