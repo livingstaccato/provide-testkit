@@ -58,7 +58,7 @@ def quality_gate(
 
             # Run quality gates
             runner = QualityRunner()
-            results = runner.run_with_gates(
+            passed, tool_results = runner.run_with_gates(
                 analysis_path,
                 gates,
                 artifact_dir=Path(artifact_dir) if artifact_dir else None,
@@ -66,14 +66,14 @@ def quality_gate(
             )
 
             # Check if gates passed
-            if not results.passed:
-                failed_tools = [tool for tool, result in results.results.items() if not result.passed]
+            if not passed:
+                failed_tools = [tool for tool, result in tool_results.items() if not result.passed]
                 raise AssertionError(f"Quality gates failed for tools: {failed_tools}")
 
             # Execute original function
             return func(*args, **kwargs)
 
-        return wrapper
+        return wrapper  # type: ignore[return-value]
 
     return decorator
 
