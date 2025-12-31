@@ -120,7 +120,19 @@
       "Bash(we lint)",
       "Bash(we run format)",
       "Bash(do echo \"=== $file.py ===\" grep \"async def read\" src/tofusoup/tf/components/data_sources/$file.py)",
-      "Bash(1)"
+      "Bash(1)",
+      "Bash(we dev test:*)",
+      "Bash([ -d \"$dir/.venv\" ])",
+      "Bash(then echo \"=== $dir ===\" cd \"$dir\" if [ -f \"wrknv.toml\" ])",
+      "Bash(then we typecheck)",
+      "Bash(do dir=\"/Users/tim/code/gh/provide-io/$pkg\" if [ -d \"$dir\" ])",
+      "Bash(then echo \"=== $pkg ===\" cd \"$dir\")",
+      "Bash([ -f wrknv.toml ])",
+      "Bash(ty check:*)",
+      "Bash(uv run bandit:*)",
+      "Bash(paste:*)",
+      "Bash(while read line)",
+      "Bash(do echo \"$line\")"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
