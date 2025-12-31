@@ -18,7 +18,7 @@ try:
     COVERAGE_AVAILABLE = True
 except ImportError:
     COVERAGE_AVAILABLE = False
-    Coverage = None
+    Coverage = None  # type: ignore[misc, assignment]
 
 from ..base import QualityResult, QualityToolError
 

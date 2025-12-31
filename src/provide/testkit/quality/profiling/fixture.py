@@ -18,7 +18,7 @@ from ..base import BaseQualityFixture
 try:
     from .profiler import MEMRAY_AVAILABLE, PerformanceProfiler
 except ImportError:
-    PerformanceProfiler = None
+    PerformanceProfiler = None  # type: ignore[misc, assignment]
     MEMRAY_AVAILABLE = False
 
 

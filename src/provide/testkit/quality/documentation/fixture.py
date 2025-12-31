@@ -17,7 +17,7 @@ from ..base import BaseQualityFixture
 try:
     from .checker import INTERROGATE_AVAILABLE, DocumentationChecker
 except ImportError:
-    DocumentationChecker = None
+    DocumentationChecker = None  # type: ignore[misc, assignment]
     INTERROGATE_AVAILABLE = False
 
 

@@ -47,7 +47,7 @@ def freeze_time() -> Callable[[datetime.datetime | None], FrozenTime]:
 
 
 @pytest.fixture
-def time_machine(request: pytest.FixtureRequest) -> TimeMachine:
+def time_machine(request: pytest.FixtureRequest) -> Generator[TimeMachine, None, None]:
     """Advanced time manipulation fixture.
 
     Yields:
