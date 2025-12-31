@@ -38,8 +38,8 @@ import structlog
 def _strip_foundation_context(
     _logger: object,
     _method_name: str,
-    event_dict: dict,
-) -> dict:
+    event_dict: dict[str, object],
+) -> dict[str, object]:
     """Strip Foundation-specific bound context before rendering.
 
     Foundation binds logger_name and other context that PrintLogger
@@ -51,7 +51,7 @@ def _strip_foundation_context(
 
 
 structlog.configure(
-    processors=[
+    processors=[  # type: ignore[list-item]
         structlog.processors.TimeStamper(fmt="iso"),
         _strip_foundation_context,
         structlog.dev.ConsoleRenderer(),
@@ -65,8 +65,9 @@ structlog.configure(
 # Install the import hook unconditionally
 # This module is a pytest plugin (registered via pytest11 entry point) that ONLY
 # loads when pytest is running, so we always want to install the blocker.
-from provide.testkit._blocker import SetproctitleImportBlocker
-from provide.testkit._install_blocker import install_setproctitle_blocker
+# These imports must be late (after structlog config above), so we suppress E402.
+from provide.testkit._blocker import SetproctitleImportBlocker  # noqa: E402
+from provide.testkit._install_blocker import install_setproctitle_blocker  # noqa: E402
 
 install_setproctitle_blocker(force=True)
 
