@@ -292,6 +292,9 @@ class CoverageTracker:
         self.artifact_dir.mkdir(parents=True, exist_ok=True)
 
         try:
+            # Coverage is guaranteed to exist at this point by earlier check
+            assert self.coverage is not None
+
             # Generate HTML report
             html_dir = self.artifact_dir / "htmlcov"
             self.coverage.html_report(directory=str(html_dir))
