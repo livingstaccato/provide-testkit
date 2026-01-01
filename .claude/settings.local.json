@@ -147,7 +147,8 @@
       "Bash(TESTKIT_PTH_LOG=1 .venv/bin/wrknv run:*)",
       "Bash(we run test.fast tests/test_structlog_debug.py)",
       "Bash(elif [ -f \"$dir/pyproject.toml\" ])",
-      "Bash(we quality)"
+      "Bash(we quality)",
+      "Bash(do cd /Users/tim/code/gh/provide-io/$dir echo \"=== $dir ===\" we run typecheck)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
