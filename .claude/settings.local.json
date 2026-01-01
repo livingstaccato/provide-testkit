@@ -148,7 +148,9 @@
       "Bash(we run test.fast tests/test_structlog_debug.py)",
       "Bash(elif [ -f \"$dir/pyproject.toml\" ])",
       "Bash(we quality)",
-      "Bash(do cd /Users/tim/code/gh/provide-io/$dir echo \"=== $dir ===\" we run typecheck)"
+      "Bash(do cd /Users/tim/code/gh/provide-io/$dir echo \"=== $dir ===\" we run typecheck)",
+      "Bash(/Users/tim/code/gh/provide-io/pyvider-hcl/.venv/bin/python:*)",
+      "Bash(VIRTUAL_ENV=\"\" UV_PROJECT_ENVIRONMENT=\".venv\" uv pip install:*)"
     ],
     "additionalDirectories": [
       "/Users/tim/code/gh/provide-io"
