@@ -5,62 +5,32 @@ This directory contains practical examples demonstrating how to use provide-test
 ## Example Categories
 
 ### 🚀 Getting Started
-- **[basic_usage.py](basic_usage.py)**: Simple examples showing core fixture usage
-- **[first_test.py](first_test.py)**: Your first test using provide-testkit
-- **[fixture_discovery.py](fixture_discovery.py)**: How to discover and use available fixtures
+- **[basics/basic_usage.py](basics/basic_usage.py)**: Simple examples showing core fixture usage
+- **[basics/first_test.py](basics/first_test.py)**: Your first test using provide-testkit
 
 ### 🔍 Quality Analysis
-- **[quality/quality_examples.py](quality/quality_examples.py)**: Comprehensive quality module usage examples
 - **[quality/framework_demo.py](quality/framework_demo.py)**: Quality framework demonstration
 - **[quality/decorators_demo.py](quality/decorators_demo.py)**: Quality decorators examples
 - **[quality/generate_reports.py](quality/generate_reports.py)**: Report generation examples
 
 ### 📁 File and Directory Testing
-- **[file_operations.py](file_operations.py)**: Testing file creation, reading, and manipulation
-- **[directory_structures.py](directory_structures.py)**: Working with complex directory structures
-- **[file_permissions.py](file_permissions.py)**: Testing file permissions and ownership
-- **[symlinks_and_special_files.py](symlinks_and_special_files.py)**: Testing symbolic links and special file types
+- **[file/file_testing.py](file/file_testing.py)**: Testing file creation, reading, and manipulation
+- **[file/advanced_file_operations.py](file/advanced_file_operations.py)**: Working with complex file workflows
 
-### ⚡ Async and Process Testing
-- **[async_operations.py](async_operations.py)**: Testing async/await operations
-- **[subprocess_testing.py](subprocess_testing.py)**: Testing subprocess execution
-- **[event_loop_management.py](event_loop_management.py)**: Managing event loops in tests
-- **[timeout_handling.py](timeout_handling.py)**: Testing timeout scenarios
+### ⚡ Async Testing
+- **[async/async_testing.py](async/async_testing.py)**: Testing async/await operations
 
 ### 🌐 Network and Transport Testing
-- **[http_client_testing.py](http_client_testing.py)**: Testing HTTP clients with mock servers
-- **[api_integration.py](api_integration.py)**: Integration testing with external APIs
-- **[websocket_testing.py](websocket_testing.py)**: Testing WebSocket connections
-- **[grpc_testing.py](grpc_testing.py)**: Testing gRPC services and clients
-
-### 🧵 Threading and Concurrency
-- **[thread_safety.py](thread_safety.py)**: Testing thread-safe operations
-- **[concurrent_access.py](concurrent_access.py)**: Testing concurrent data access
-- **[lock_testing.py](lock_testing.py)**: Testing synchronization primitives
-- **[thread_pool_usage.py](thread_pool_usage.py)**: Testing with thread pools
-
-### 🔐 Cryptography and Security
-- **[certificate_testing.py](certificate_testing.py)**: Testing with TLS certificates
-- **[key_management.py](key_management.py)**: Testing cryptographic key operations
-- **[encryption_testing.py](encryption_testing.py)**: Testing encryption and decryption
-- **[signature_verification.py](signature_verification.py)**: Testing digital signatures
-
-### 📦 Archive and Compression
-- **[archive_creation.py](archive_creation.py)**: Testing archive creation and extraction
-- **[compression_testing.py](compression_testing.py)**: Testing different compression formats
-- **[archive_validation.py](archive_validation.py)**: Validating archive integrity
-
-### ⏰ Time and Scheduling
-- **[time_freezing.py](time_freezing.py)**: Testing with frozen time
-- **[clock_mocking.py](clock_mocking.py)**: Mocking system clocks
-- **[scheduled_operations.py](scheduled_operations.py)**: Testing scheduled tasks
-- **[timeout_scenarios.py](timeout_scenarios.py)**: Testing various timeout scenarios
+- **[network/http_testing.py](network/http_testing.py)**: Testing HTTP clients with mock servers
 
 ### 💻 CLI and Command-Line Testing
-- **[cli_applications.py](cli_applications.py)**: Testing command-line applications
-- **[argument_parsing.py](argument_parsing.py)**: Testing CLI argument parsing
-- **[interactive_commands.py](interactive_commands.py)**: Testing interactive CLI commands
-- **[cli_output_testing.py](cli_output_testing.py)**: Testing CLI output and formatting
+- **[cli/cli_testing.py](cli/cli_testing.py)**: Testing command-line applications
+
+### 🧩 Patterns
+- **[patterns/mocking_patterns.py](patterns/mocking_patterns.py)**: Mocking and test organization patterns
+
+### 🔐 Security
+- **[security_scan_example.py](security_scan_example.py)**: Security scan fixtures and reporting
 
 ## Running Examples
 
