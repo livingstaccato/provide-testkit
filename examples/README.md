@@ -48,13 +48,13 @@ source .venv/bin/activate
 ### Running Individual Examples
 ```bash
 # Run a specific example
-pytest examples/basic_usage.py -v
+pytest examples/basics/basic_usage.py -v
 
 # Run all examples in a category
-pytest examples/file_operations.py examples/directory_structures.py -v
+pytest examples/file/file_testing.py examples/file/advanced_file_operations.py -v
 
 # Run with output capture disabled (to see print statements)
-pytest examples/basic_usage.py -v -s
+pytest examples/basics/basic_usage.py -v -s
 ```
 
 ### Running All Examples
@@ -110,24 +110,19 @@ def test_example_functionality(fixture_name):
 ## Key Learning Paths
 
 ### Path 1: Testing Basics
-1. **[basic_usage.py](basic_usage.py)**: Start here for fundamental concepts
-2. **[file_operations.py](file_operations.py)**: Learn file testing patterns
-3. **[async_operations.py](async_operations.py)**: Understand async testing
+1. **[basics/basic_usage.py](basics/basic_usage.py)**: Start here for fundamental concepts
+2. **[file/file_testing.py](file/file_testing.py)**: Learn file testing patterns
+3. **[async/async_testing.py](async/async_testing.py)**: Understand async testing
 
-### Path 2: Web Applications
-1. **[http_client_testing.py](http_client_testing.py)**: HTTP client testing
-2. **[api_integration.py](api_integration.py)**: API integration patterns
-3. **[websocket_testing.py](websocket_testing.py)**: Real-time communication testing
+### Path 2: Quality & Reporting
+1. **[quality/framework_demo.py](quality/framework_demo.py)**: Quality framework overview
+2. **[quality/decorators_demo.py](quality/decorators_demo.py)**: Quality decorators in action
+3. **[quality/generate_reports.py](quality/generate_reports.py)**: Report generation workflow
 
-### Path 3: System Applications
-1. **[subprocess_testing.py](subprocess_testing.py)**: Process execution testing
-2. **[file_permissions.py](file_permissions.py)**: System-level file testing
-3. **[cli_applications.py](cli_applications.py)**: Command-line application testing
-
-### Path 4: Security Applications
-1. **[certificate_testing.py](certificate_testing.py)**: TLS certificate testing
-2. **[encryption_testing.py](encryption_testing.py)**: Cryptographic operations
-3. **[signature_verification.py](signature_verification.py)**: Digital signature validation
+### Path 3: CLI & Automation
+1. **[cli/cli_testing.py](cli/cli_testing.py)**: Command-line application testing
+2. **[patterns/mocking_patterns.py](patterns/mocking_patterns.py)**: Mocking and organization patterns
+3. **[security_scan_example.py](security_scan_example.py)**: Security scan fixtures
 
 ## Common Patterns
 
@@ -285,4 +280,4 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for detailed contribution guidelines.
 
 ---
 
-Ready to explore? Start with [basic_usage.py](basic_usage.py) or pick an example that matches your testing needs!
+Ready to explore? Start with [basics/basic_usage.py](basics/basic_usage.py) or pick an example that matches your testing needs!
