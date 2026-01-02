@@ -160,7 +160,7 @@ Security scan results are stored in `.provide/output/security/` (gitignored):
 ### Python Tools (via pip)
 
 ```bash
-uv pip install provide-testkit[security]
+uv add provide-testkit[security]
 # Installs: bandit, safety, pip-audit, semgrep, checkov
 ```
 
