@@ -22,6 +22,12 @@ TestKit provides a unified testing framework designed specifically for applicati
 - ⚡ **Async Support** - Full async/await testing capabilities
 - 🧵 **Thread Safety Testing** - Multi-threading test utilities
 
+## Quick Start
+For a quick start, see [docs/index.md](docs/index.md).
+
+## Documentation
+Documentation lives in [docs/index.md](docs/index.md).
+
 ## Development
 
 ### Quick Start
@@ -51,3 +57,9 @@ This project uses `wrknv` for task automation. Run `we tasks` to see all availab
 - `we typecheck` - Run type checker
 
 See [CLAUDE.md](CLAUDE.md) for detailed development instructions and architecture information.
+
+## Contributing
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+## License
+See [LICENSE](LICENSE) for license details.
