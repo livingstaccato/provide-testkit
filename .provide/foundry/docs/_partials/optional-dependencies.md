@@ -9,13 +9,13 @@ This project supports optional dependency groups for specific features.
 uv add "{{PACKAGE_NAME}}[extra_name]"
 
 # Using pip
-pip install "{{PACKAGE_NAME}}[extra_name]"
+uv add {{PACKAGE_NAME}}[extra_name]
 
 # Multiple extras
-pip install "{{PACKAGE_NAME}}[extra1,extra2]"
+uv add {{PACKAGE_NAME}}[extra1,extra2]
 
 # All optional dependencies
-pip install "{{PACKAGE_NAME}}[all]"
+uv add {{PACKAGE_NAME}}[all]
 ```
 
 **In pyproject.toml:**

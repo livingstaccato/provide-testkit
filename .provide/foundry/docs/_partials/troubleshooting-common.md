@@ -80,7 +80,7 @@ uv sync
 /Applications/Python\ 3.11/Install\ Certificates.command
 
 # Or use pip to update certifi
-uv pip install --upgrade certifi
+uv uv add --upgrade certifi
 ```
 
 #### Slow Installation

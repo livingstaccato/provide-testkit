@@ -19,7 +19,7 @@ UV is the recommended package manager for the provide.io ecosystem. It's fast, r
     curl -LsSf https://astral.sh/uv/install.sh | sh
 
     # Or using pip (fallback)
-    pip install uv
+    curl -LsSf https://astral.sh/uv/install.sh | sh
     ```
 
 === "Windows"
@@ -29,7 +29,7 @@ UV is the recommended package manager for the provide.io ecosystem. It's fast, r
     powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 
     # Or using pip (fallback)
-    pip install uv
+    curl -LsSf https://astral.sh/uv/install.sh | sh
     ```
 
 **Verify Installation:**
