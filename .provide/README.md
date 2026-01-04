@@ -41,7 +41,7 @@ Assets extracted from other provide.io ecosystem packages. These are **regenerat
 
 - `foundry/theme/` - MkDocs theme extracted from provide-foundry
 
-**Regenerate with:** `we docs.setup`
+**Regenerate with:** `we run docs.setup`
 
 ### `output/` - Tool Execution Outputs (Gitignored)
 
@@ -99,10 +99,10 @@ Outputs go to `.provide/output/security/`
 
 ```bash
 # Extracts theme to .provide/shared/foundry/theme/
-we docs.setup
+we run docs.setup
 
 # Uses configs from .provide/foundry/
-we docs.build
+we run docs.build
 ```
 
 ## Best Practices
