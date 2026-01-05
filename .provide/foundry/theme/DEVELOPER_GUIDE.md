@@ -545,7 +545,7 @@ package = true
 # Test clean install (in isolated environment)
 uv venv .test-venv
 source .test-venv/bin/activate
-uv uv add /path/to/provide-foundry
+uv add /path/to/provide-foundry
 
 # Verify theme is accessible
 python -c "from provide.foundry.theme import THEME_DIR; print(THEME_DIR)"
