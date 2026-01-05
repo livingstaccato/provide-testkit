@@ -8,7 +8,6 @@ This project supports optional dependency groups for specific features.
 # Using uv (recommended)
 uv add "{{PACKAGE_NAME}}[extra_name]"
 
-
 # Multiple extras
 uv add {{PACKAGE_NAME}}[extra1,extra2]
 
@@ -31,8 +30,8 @@ The specific extras available depend on the project. Use `{{COMMAND_NAME}} --hel
 **Checking Installed Extras:**
 ```bash
 # Show package with dependencies
-uv pip show {{PACKAGE_NAME}}
+uv run python -c "import importlib.metadata as m; print(m.version('{{PACKAGE_NAME}}'))"
 
 # List all installed packages
-uv pip list
+uv run python -c "import importlib.metadata as m; print('\\n'.join(sorted(d.metadata['Name'] for d in m.distributions())))"
 ```

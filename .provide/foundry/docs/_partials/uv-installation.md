@@ -17,7 +17,6 @@ UV is the recommended package manager for the provide.io ecosystem. It's fast, r
     ```bash
     # Using the install script
     curl -LsSf https://astral.sh/uv/install.sh | sh
-
     ```
 
 === "Windows"
@@ -25,7 +24,6 @@ UV is the recommended package manager for the provide.io ecosystem. It's fast, r
     ```powershell
     # Using PowerShell
     powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-
     ```
 
 **Verify Installation:**

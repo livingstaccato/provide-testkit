@@ -79,7 +79,7 @@ uv sync
 # macOS: Install certificates
 /Applications/Python\ 3.11/Install\ Certificates.command
 
-# Or use uv to update certifi
+# Update certifi with uv
 uv add --upgrade certifi
 ```
 
@@ -90,7 +90,6 @@ uv add --upgrade certifi
 **Solution**:
 ```bash
 # Use UV's parallel installation (default)
-# Ensure you're using UV:
 uv sync
 
 # Check network connection

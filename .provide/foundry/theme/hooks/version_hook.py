@@ -75,7 +75,7 @@ def define_env(env: Any) -> None:
     Hook for mkdocs-macros plugin to define custom variables and macros.
     """
 
-    @env.macro  # type: ignore[misc]
+    @env.macro  # type: ignore[untyped-decorator]
     def audit_status(
         audited: bool = False,
         reviewer: str = "",

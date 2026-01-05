@@ -29,7 +29,7 @@ If the command is not found:
 
 ```bash
 # Check if package is installed
-uv pip list | grep {{PACKAGE_NAME}}
+uv run python -c "import importlib.metadata as m; print(m.version('{{PACKAGE_NAME}}'))"
 
 # Find executable location
 find ~/.local -name "{{COMMAND_NAME}}"

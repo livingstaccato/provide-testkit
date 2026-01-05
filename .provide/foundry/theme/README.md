@@ -93,15 +93,15 @@ Animated terminal demonstrations for CLI tools. Perfect for plating, tofusoup, w
 <div class="termy">
 
 ```console
-$ plating serve --port 8000
-// Starting plating development server...
-Server running at http://localhost:8000
+$ we run docs.serve
+// Starting documentation server...
+Server running at http://localhost:11000
 Press Ctrl+C to stop
 
-$ plating build
-// Building static site...
+$ we run docs.build
+// Building documentation site...
 ---> 100%
-Build complete! Output: dist/
+Build complete! Output: site/
 ```
 
 </div>

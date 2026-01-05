@@ -80,7 +80,7 @@ def main() -> int:
         print()
         print("Manual setup:")
         print("  1. Run: uv sync")
-        print("  2. Run: make docs-setup")
+        print("  2. Run: we run docs.setup")
         return 1
 
 

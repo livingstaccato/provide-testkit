@@ -6,7 +6,7 @@ Some features require the Go programming language to be installed.
 ```bash
 # Check Go version
 go version
-# Should show Go 1.21 or higher
+# Should show Go 1.24 or higher
 ```
 
 **Installing Go:**
@@ -14,9 +14,9 @@ go version
 === "Linux"
     ```bash
     # Download and install latest Go
-    wget https://go.dev/dl/go1.23.0.linux-amd64.tar.gz
+    wget https://go.dev/dl/go1.24.0.linux-amd64.tar.gz
     sudo rm -rf /usr/local/go
-    sudo tar -C /usr/local -xzf go1.23.0.linux-amd64.tar.gz
+    sudo tar -C /usr/local -xzf go1.24.0.linux-amd64.tar.gz
 
     # Add to PATH
     echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc

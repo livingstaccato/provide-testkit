@@ -20,16 +20,32 @@ _footer_content: str | None = None
 
 
 def _find_partials_dir(config: dict[str, Any]) -> Path | None:
-    """Find the partials directory, checking project overrides first, then foundry defaults."""
-    docs_dir = Path(config.get("docs_dir", "docs"))
-    project_root = docs_dir.parent
+    """Find the partials directory, checking project overrides first, then foundry defaults.
+
+    NOTE: When mkdocs-monorepo is used, docs_dir points to a temp directory.
+    We must use config_file_path to find the actual project root.
+    """
+    # Get actual project root from config file path (not docs_dir which may be temp)
+    config_file = config.get("config_file_path")
+    if config_file:
+        project_root = Path(config_file).parent
+    else:
+        # Fallback for non-monorepo builds
+        docs_dir = Path(config.get("docs_dir", "docs"))
+        project_root = docs_dir.parent
 
     # Check project-specific overrides first
     project_partials = project_root / "docs" / "_partials"
     if project_partials.exists():
         return project_partials
 
-    # Fall back to foundry defaults (extracted via we docs setup)
+    # Special case for provide-foundry source tree (canonical source)
+    # Check this BEFORE .provide/ since source is authoritative for provide-foundry
+    src_foundry_partials = project_root / "src" / "provide" / "foundry" / "docs" / "_partials"
+    if src_foundry_partials.exists():
+        return src_foundry_partials
+
+    # Fall back to foundry defaults (extracted via we run docs.setup)
     foundry_partials = project_root / ".provide" / "foundry" / "docs" / "_partials"
     if foundry_partials.exists():
         return foundry_partials
@@ -78,13 +94,14 @@ def on_page_markdown(
     skip_footer = meta.get("skip_global_footer", False)
 
     # Skip if already has header/footer injected (idempotency)
-    has_header = "POC (proof-of-concept)" in markdown or "<!-- global-header -->" in markdown
+    has_header = "AI-Generated Content" in markdown or "<!-- global-header -->" in markdown
     has_footer = "<!-- global-footer -->" in markdown
 
     # Inject header after first heading if not skipped and not already present
     if header_content and not skip_header and not has_header:
         # Find first heading (# Title)
         heading_match = re.search(r"^# .+$", markdown, re.MULTILINE)
+        header_block = f"<!-- global-header -->\n{header_content}\n<!-- /global-header -->\n\n"
         if heading_match:
             insert_pos = heading_match.end()
             # Skip past any immediate description line (non-heading, non-empty)
@@ -102,6 +119,10 @@ def on_page_markdown(
 
             header_block = f"\n\n<!-- global-header -->\n{header_content}\n<!-- /global-header -->\n"
             markdown = markdown[:insert_pos] + header_block + markdown[insert_pos:]
+        else:
+            # No heading found (e.g., auto-generated API reference pages)
+            # Prepend header at the very beginning
+            markdown = header_block + markdown
 
     # Append footer if not skipped and not already present
     if footer_content and not skip_footer and not has_footer:

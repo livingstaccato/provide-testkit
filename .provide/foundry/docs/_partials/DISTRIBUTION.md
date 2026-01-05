@@ -42,7 +42,7 @@ The partials are included in the provide-foundry wheel package via `pyproject.to
 When building documentation, projects run:
 
 ```bash
-make docs-setup
+we run docs.setup
 ```
 
 Which executes:
@@ -109,7 +109,7 @@ Projects reference partials using the local path:
 
 3. The partial will be automatically:
    - Packaged with provide-foundry
-   - Extracted when projects run `make docs-setup`
+   - Extracted when projects run `we run docs.setup`
    - Available at `.provide/foundry/docs/_partials/new-partial.md`
 
 ### Updating Existing Partials
@@ -121,7 +121,7 @@ Projects reference partials using the local path:
 
 2. Projects update partials by running:
    ```bash
-   make docs-setup  # Re-extracts latest partials
+   we run docs.setup  # Re-extracts latest partials
    ```
 
 ## File Locations Summary
@@ -143,7 +143,7 @@ The `.provide/` directory is:
 To update:
 ```bash
 # In any project
-make docs-setup
+we run docs.setup
 ```
 
 This ensures all projects use the latest partials from their installed provide-foundry version.

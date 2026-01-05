@@ -22,8 +22,8 @@ cd my-project
 # Create virtual environment and install dependencies
 uv sync
 
-# Or for development with extras
-uv sync --extra dev --extra all
+# Or for development dependencies
+uv sync --all-groups
 ```
 
 **Activating the environment:**

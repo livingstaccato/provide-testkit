@@ -237,7 +237,7 @@ vim src/provide/foundry/theme/stylesheets/provide-theme.css
 
 # Test immediately (changes already available)
 mkdocs serve
-# Open http://127.0.0.1:8000
+# Open http://127.0.0.1:11000
 
 # Check browser console for errors
 # Verify visual changes
