@@ -4,7 +4,7 @@ The shared theme includes an announcement banner system for marking AI-generated
 
 ## Features
 
-- **Automatic version detection**: Reads `VERSION` file and displays alpha/pre-release status Some documented items are exploratory and may change or be removed.
+- **Automatic version detection**: Reads `VERSION` file and displays alpha/pre-release status Some APIs may change during the pre-release series.
 - **AI-generated content notice**: Shows warning banner on all pages by default
 - **Per-page control**: Use frontmatter to mark pages as audited and hide the banner
 - **Responsive design**: Works on mobile and desktop with light/dark mode support
