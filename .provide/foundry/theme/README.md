@@ -10,7 +10,7 @@ The shared theme is distributed as a **Python namespace package**. Theme files a
 
 ```bash
 cd provide-foundry
-uv add --editable .
+uv pip install -e .
 ```
 
 ### Step 2: Use Shared Base Configuration
@@ -252,7 +252,7 @@ mkdocs serve  # Check http://127.0.0.1:8009
 
 The namespace package approach provides:
 - **Direct access**: No file copying or syncing required
-- **Editable installs**: `uv add --editable .` makes changes immediately available
+- **Editable installs**: `uv pip install -e .` makes changes immediately available
 - **Type safety**: `from provide.foundry.theme import THEME_DIR` is type-checked
 - **No gitignore needed**: No generated files in project directories
 - **Python-based distribution**: Theme assets managed as a proper Python package

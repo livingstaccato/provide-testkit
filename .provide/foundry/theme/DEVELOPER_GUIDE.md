@@ -6,7 +6,7 @@ This guide is for developers working on the shared theme system itself. If you'r
 
 ### Namespace Package Distribution
 
-The shared theme is distributed as a **Python namespace package** at `provide.foundry.theme`. Theme files are accessed directly from the installed package, eliminating the need for file synchronization or copying. During development, `uv add --editable .` provides immediate access to theme changes.
+The shared theme is distributed as a **Python namespace package** at `provide.foundry.theme`. Theme files are accessed directly from the installed package, eliminating the need for file synchronization or copying. During development, `uv pip install -e .` provides immediate access to theme changes.
 
 ### File Structure
 
@@ -46,7 +46,7 @@ projects/
 
 ### How It Works
 
-1. **Installation**: `uv add --editable /path/to/provide-foundry` installs theme as editable package
+1. **Installation**: `uv pip install -e /path/to/provide-foundry` installs theme as editable package
 2. **Access**: Python code imports `from provide.foundry.theme import THEME_DIR`
 3. **Resolution**: `THEME_DIR` points to the actual theme directory in the installed package
 4. **Configuration**: Projects inherit from `base-mkdocs.yml` which already configures theme paths
@@ -78,7 +78,7 @@ This simple implementation allows projects to reference the theme directory with
 cd /path/to/provide-foundry
 
 # Install in editable mode
-uv add --editable .
+uv pip install -e .
 
 # Verify installation
 python -c "from provide.foundry.theme import THEME_DIR; print(THEME_DIR)"
@@ -450,7 +450,7 @@ The theme uses a consistent 8px-based spacing scale:
 ```bash
 # Install in editable mode
 cd /path/to/provide-foundry
-uv add --editable .
+uv pip install -e .
 
 # Verify installation
 python -c "from provide.foundry.theme import THEME_DIR; print(THEME_DIR)"
