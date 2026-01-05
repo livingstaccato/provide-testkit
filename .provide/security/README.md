@@ -157,7 +157,7 @@ Security scan results are stored in `.provide/output/security/` (gitignored):
 
 ## Tool Installation
 
-### Python Tools (via pip)
+### Python Tools (via uv)
 
 ```bash
 uv add provide-testkit[security]

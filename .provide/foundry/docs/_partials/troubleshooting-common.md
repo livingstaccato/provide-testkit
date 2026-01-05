@@ -35,7 +35,7 @@ uv sync
 
 **Solution**:
 ```bash
-# Never use sudo with UV or pip in virtual environments
+# Never use sudo with UV in virtual environments
 # Instead, ensure you own the directory
 chown -R $USER:$USER .
 
@@ -79,7 +79,7 @@ uv sync
 # macOS: Install certificates
 /Applications/Python\ 3.11/Install\ Certificates.command
 
-# Or use pip to update certifi
+# Or use uv to update certifi
 uv add --upgrade certifi
 ```
 
@@ -90,8 +90,8 @@ uv add --upgrade certifi
 **Solution**:
 ```bash
 # Use UV's parallel installation (default)
-# Ensure you're using UV, not pip:
-uv sync  # Much faster than pip
+# Ensure you're using UV:
+uv sync
 
 # Check network connection
 # Consider using a mirror if outside US/Europe

@@ -8,8 +8,6 @@ This project supports optional dependency groups for specific features.
 # Using uv (recommended)
 uv add "{{PACKAGE_NAME}}[extra_name]"
 
-# Using pip
-uv add {{PACKAGE_NAME}}[extra_name]
 
 # Multiple extras
 uv add {{PACKAGE_NAME}}[extra1,extra2]
