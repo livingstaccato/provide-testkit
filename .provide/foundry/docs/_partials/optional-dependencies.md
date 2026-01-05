@@ -33,8 +33,8 @@ The specific extras available depend on the project. Use `{{COMMAND_NAME}} --hel
 **Checking Installed Extras:**
 ```bash
 # Show package with dependencies
-pip show {{PACKAGE_NAME}}
+uv pip show {{PACKAGE_NAME}}
 
 # List all installed packages
-pip list
+uv pip list
 ```

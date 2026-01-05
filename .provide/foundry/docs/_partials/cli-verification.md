@@ -29,7 +29,7 @@ If the command is not found:
 
 ```bash
 # Check if package is installed
-pip list | grep {{PACKAGE_NAME}}
+uv pip list | grep {{PACKAGE_NAME}}
 
 # Find executable location
 find ~/.local -name "{{COMMAND_NAME}}"
