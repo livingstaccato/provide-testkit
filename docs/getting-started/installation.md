@@ -126,4 +126,4 @@ pytest --fixtures | grep provide
 
 - **[Quick Start](../getting-started/quick-start/)** - Your first test with Provide TestKit
 - **[API Reference](../api/)** - Complete API documentation
-- **[Quality Guide](../quality_guide/)** - Code quality testing tools
+- **[Quality Guide](../quality_guide.md)** - Code quality testing tools
