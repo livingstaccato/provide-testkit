@@ -21,7 +21,7 @@ uv add provide-testkit --group dev
 ### Using pip
 
 ```bash
-pip install provide-testkit
+uv add provide-testkit
 ```
 
 ### Optional Dependencies
