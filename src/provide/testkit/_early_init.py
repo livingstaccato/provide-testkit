@@ -17,13 +17,41 @@ The .pth file approach ensures the blocker is installed:
 - At the same time as sitecustomize.py would run
 
 This provides the best developer experience - completely automatic activation
-with zero configuration needed."""
+with zero configuration needed.
+
+IMPORTANT: This module MUST NOT output anything to stdout during initialization.
+UV queries Python to get environment info and expects pure JSON output. Any
+stdout pollution will break UV with "expected value at line 1 column 1"."""
 
 from __future__ import annotations
 
+import io
 import os
 import sys
 from typing import Any
+
+
+class _SuppressStdout:
+    """Context manager that completely suppresses stdout.
+
+    This is necessary because Foundation may output debug logs during import,
+    which would pollute UV's Python query that expects only JSON output.
+    """
+
+    def __init__(self) -> None:
+        self._original_stdout: Any = None
+        self._devnull: Any = None
+
+    def __enter__(self) -> "_SuppressStdout":
+        self._original_stdout = sys.stdout
+        self._devnull = io.StringIO()
+        sys.stdout = self._devnull
+        return self
+
+    def __exit__(self, *args: Any) -> None:
+        sys.stdout = self._original_stdout
+        if self._devnull:
+            self._devnull.close()
 
 
 def _is_testing_context() -> bool:
